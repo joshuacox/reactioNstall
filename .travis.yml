@@ -38,4 +38,3 @@ script:
   - /usr/bin/time -v make artful.done
   - /usr/bin/time -v make tumbleweed.done
   - /usr/bin/time -v make centos7.done
-  - /usr/bin/time -v make done
