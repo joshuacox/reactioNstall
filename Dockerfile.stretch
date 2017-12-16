@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && useradd -s /bin/sh -d /home/reaction reaction \
   && mkdir -p /home/reaction \
   && chown reaction. /home/reaction \
-  && apt-get remove -yqq nodejs npm \
+  && apt-get remove -yqq nodejs \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
