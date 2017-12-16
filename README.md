@@ -14,7 +14,8 @@ curl -L https://git.io/rxNstall | bash
 
 This is an UN-official installer for [Reaction Commerce](https://reactioncommerce.com/).
 
-I'd support all Linux distros, At the moment there are Dockerfiles in this repo meant to test all of the major distros.
+I'd like to support all Linux distros.
+At the moment there are Dockerfiles in this repo meant to test all of the major distros.
 They also document the bare minimum packages I install before running this script (curl, git, etc).
 
 for example look at this [line](for xenial):
