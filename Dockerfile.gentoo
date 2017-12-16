@@ -1,0 +1,34 @@
+FROM gentoo/stage3-amd64
+
+ENV BUILD_PACKAGES='bash git wget curl tar nodejs npm ca-certificates' \
+  REACTION_ROOT='/home/reaction/reaction' \
+  TOOL_NODE_FLAGS="--max-old-space-size=2048" \
+  REACTIONSTALL_UPDATED=20171215
+
+RUN emerge-webrsync
+RUN emerge --autounmask-write arduino; etc-update --automode -5; emerge arduino
+
+RUN echo emerge \
+  && emerge-webrsync \
+  && emerge \
+     $BUILD_PACKAGES \
+  && etc-update --automode -5 \
+  && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
+  && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
+  && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
+  && locale-gen \
+  && useradd -s /bin/sh -d /home/reaction reaction \
+  && mkdir -p /home/reaction \
+  && chown reaction. /home/reaction \
+  && rm -Rf /usr/portage
+
+COPY rxNstall /home/reaction/rxNstall
+RUN chown -R reaction:reaction /home/reaction
+
+USER reaction
+WORKDIR /home/reaction
+
+RUN /bin/bash -l ./rxNstall
+
+COPY test /test
+CMD [ "/bin/bash", "-l", "/test" ]

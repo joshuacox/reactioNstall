@@ -39,3 +39,4 @@ script:
   - /usr/bin/time -v make tumbleweed.done
   - /usr/bin/time -v make centos7.done
   - /usr/bin/time -v make archlinux.done
+  - /usr/bin/time -v make gentoo.done
