@@ -25,3 +25,5 @@ jobs:
       - run: /usr/bin/time -v make stretch.done
 
       - run: /usr/bin/time -v make jessie.done
+
+      - run: /usr/bin/time -v make tumbleweed.done

@@ -1,4 +1,4 @@
-all: fedora artful zesty xenial trusty buster stretch jessie
+all: fedora artful zesty xenial trusty buster stretch jessie tumbleweed
 
 build: xenial-build
 
@@ -129,7 +129,21 @@ artful-run: clean artful-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:artful
 
-done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done
+tumbleweed: tumbleweed-run logs
+
+tumbleweed.done: tumbleweed
+	date -I > tumbleweed.done
+
+tumbleweed-build:
+	docker build -f Dockerfile.tumbleweed -t joshuacox/rxnstall:tumbleweed .
+
+tumbleweed-run: clean tumbleweed-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:tumbleweed
+
+done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done
 
 rm:
 	-@rm fedora.done

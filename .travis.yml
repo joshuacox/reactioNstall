@@ -36,3 +36,4 @@ script:
   - /usr/bin/time -v make xenial.done
   - /usr/bin/time -v make zesty.done
   - /usr/bin/time -v make artful.done
+  - /usr/bin/time -v make tumbleweed.done

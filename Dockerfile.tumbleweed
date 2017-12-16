@@ -1,14 +1,19 @@
-FROM fedora:27
+FROM opensuse:tumbleweed
 
-#ENV BUILD_PACKAGES='bash git wget curl locales sudo bsdtar' \
+#ZYPPER_OPTS='--non-interactive --no-gpg-checks --auto-agree-with-licenses --quiet' \
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
-  REACTIONSTALL_UPDATED=20171215
+    ZYPPER_OPTS='--non-interactive --no-gpg-checks --quiet' \
+    REACTIONSTALL_UPDATED=20171215
 
 # Updating dependencies, installing Apache and cleaning dnf caches to reduce container size
-RUN dnf -yq update && dnf -yq install $BUILD_PACKAGES && dnf clean all
+RUN  zypper $ZYPPER_OPTS update \
+  && zypper $ZYPPER_OPTS install $BUILD_PACKAGES \
+  && zypper $ZYPPER_OPTS clean
 
 RUN ls -lh /home \
   && useradd -s /bin/sh -d /home/reaction reaction \
+  && groupadd reaction \
+  && gpasswd -a reaction reaction \
   && mkdir -p /home/reaction \
   && chown reaction. /home/reaction \
   && ls -lh /home/reaction
