@@ -28,4 +28,5 @@ before_install:
 script:
 # /bin/sh points to dash on trusty, which can cause some of the tests to fail
   - ls -alh `which sh`
-  - /usr/bin/time -v make
+  - /usr/bin/time -v make ubuntu
+  - /usr/bin/time -v make fedora

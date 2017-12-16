@@ -1,4 +1,6 @@
-all: run logs
+all: ubuntu fedora
+
+ubuntu: run logs
 
 build:
 	docker build -t joshuacox/rxnstall .
@@ -26,3 +28,14 @@ clean:
 	-docker stop `cat .rxnstall.cid`
 	-docker rm `cat .rxnstall.cid`
 	-@rm -f .rxnstall.cid
+
+fedora: fedora-run logs
+
+fedora-build:
+	docker build -f Dockerfile.fedora -t joshuacox/rxnstall:fedora .
+
+fedora-run: clean fedora-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:fedora
