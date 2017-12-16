@@ -130,3 +130,13 @@ artful-run: clean artful-build
 		joshuacox/rxnstall:artful
 
 done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done
+
+rm:
+	-@rm fedora.done
+	-@rm artful.done
+	-@rm zesty.done
+	-@rm xenial.done
+	-@rm trusty.done
+	-@rm buster.done
+	-@rm stretch.done
+	-@rm jessie.done
