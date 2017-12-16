@@ -41,8 +41,15 @@ cd
 
 install_nvm () {
   echo "installing nvm"
+  wget https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh
+  ls -lh install.sh
+  cat install.sh
+  bash install.sh
   curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
   source ~/.bashrc
+  ls -lh .nvm
+  ls -lh .bashrc
+  cat .bashrc
   nvm install --lts
   nvm alias default lts/carbon
 }

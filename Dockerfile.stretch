@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-ENV BUILD_PACKAGES='bash git wget curl locales tar nodejs npm' \
+ENV BUILD_PACKAGES='bash git wget curl locales tar nodejs ca-certificates' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONSTALL_UPDATED=20171215
@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
-RUN apt-get remove -yqq nodejs npm
+RUN apt-get remove -yqq nodejs
 COPY rxNstall /home/reaction/rxNstall
 RUN chown -R reaction:reaction /home/reaction
 
