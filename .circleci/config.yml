@@ -12,24 +12,8 @@ jobs:
 
       - run: /usr/bin/time -v make fedora.done
 
-      - run: /usr/bin/time -v make trusty.done
-
-      - run: /usr/bin/time -v make xenial.done
-
-      - run: /usr/bin/time -v make zesty.done
-
-      - run: /usr/bin/time -v make artful.done
-
-      - run: /usr/bin/time -v make buster.done
-
       - run: /usr/bin/time -v make stretch.done
-
-      - run: /usr/bin/time -v make jessie.done
 
       - run: /usr/bin/time -v make tumbleweed.done
 
       - run: /usr/bin/time -v make centos7.done
-
-      - run: /usr/bin/time -v make archlinux.done
-
-      - run: /usr/bin/time -v make gentoo.done
