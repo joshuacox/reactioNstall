@@ -55,7 +55,7 @@ curl -L https://git.io/rxNstall | bash
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux)
 
 ### Gentoo
-[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/gentoo.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/gentoo)
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=gentoo)](https://travis-ci.org/joshuacox/rxNstall)
 
 Feel free to submit PRs, or just an issue requesting more, all issues
 welcome here.
