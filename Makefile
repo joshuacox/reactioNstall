@@ -1,4 +1,4 @@
-all: fedora artful zesty xenial trusty stretch
+all: fedora artful zesty xenial trusty buster stretch jessie
 
 build: xenial-build
 
@@ -29,6 +29,20 @@ fedora-run: clean fedora-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:fedora
 
+buster: buster-run logs
+
+buster.done: buster
+	date -I > buster.done
+
+buster-build:
+	docker build -f Dockerfile.buster -t joshuacox/rxnstall:buster .
+
+buster-run: clean buster-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:buster
+
 stretch: stretch-run logs
 
 stretch.done: stretch
@@ -42,6 +56,20 @@ stretch-run: clean stretch-build
 		-d \
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:stretch
+
+jessie: jessie-run logs
+
+jessie.done: jessie
+	date -I > jessie.done
+
+jessie-build:
+	docker build -f Dockerfile.jessie -t joshuacox/rxnstall:jessie .
+
+jessie-run: clean jessie-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:jessie
 
 xenial: xenial-run logs
 
@@ -101,4 +129,4 @@ artful-run: clean artful-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:artful
 
-done: fedora.done artful.done zesty.done xenial.done trusty.done stretch.done
+done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done
