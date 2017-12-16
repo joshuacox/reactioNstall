@@ -20,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
-RUN apt-get remove -yqq nodejs npm
+#RUN apt-get remove -yqq nodejs npm
 COPY rxNstall /home/reaction/rxNstall
 RUN chown -R reaction:reaction /home/reaction
 
