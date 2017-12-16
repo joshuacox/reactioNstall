@@ -10,6 +10,14 @@ jobs:
 
       - run: .circleci/install.sh
 
-      - run: /usr/bin/time -v make ubuntu
+      - run: /usr/bin/time -v make fedora.done
 
-      - run: /usr/bin/time -v make fedora
+      - run: /usr/bin/time -v make zesty.done
+
+      - run: /usr/bin/time -v make xenial.done
+
+      - run: /usr/bin/time -v make trusty.done
+
+      - run: /usr/bin/time -v make stretch.done
+
+      - run: /usr/bin/time -v make artful.done
