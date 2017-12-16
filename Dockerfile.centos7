@@ -19,6 +19,7 @@ RUN chown -R reaction:reaction /home/reaction
 USER reaction
 WORKDIR /home/reaction
 
+RUN rm .bashrc
 RUN /bin/bash -l ./rxNstall
 
 COPY test /test
