@@ -1,0 +1,164 @@
+#!/bin/bash
+TMP_DIR=$(mktemp -d --suffix='.reactioNstall')
+killtmp () {
+  cd
+  rm -Rf $TMP_DIR
+}
+trap killtmp EXIT
+
+# Check if a command exists
+check_cmd () {
+  if ! type "$1" > /dev/null; then
+    errror
+    echo "$1 was not found in your path!"
+    echo "To proceed please install $1 to your path and try again!"
+    exit 1
+  fi
+}
+
+chkdir () {
+  if [ ! -w $1 ] ; then
+    sudo mkdir -p $1
+    sudo chown $USER. $1
+  fi
+  if [ ! -w $1 ] ; then
+    errror
+    echo "Cannot write to $1, please check your permissions"
+    exit 2
+  fi
+}
+
+reaction_full_test () {
+cd $TMP_DIR
+reaction help
+echo init reaction
+reaction init
+cd reaction
+echo test reaction
+reaction test
+cd
+}
+
+install_nvm () {
+  echo "installing nvm"
+  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+  source ~/.bashrc
+  nvm install --lts
+  nvm alias default lts/carbon
+}
+
+linux_install () {
+  install_nvm
+
+  source ~/.bashrc
+
+  check_cmd npm
+  check_cmd node
+  chkdir $HOME/.nvm
+
+  echo -n 'npm version: '
+  npm -v
+  echo -n 'node version: '
+  node -v
+
+  echo 'Installing reaction-cli'
+  npm i -g reaction-cli
+  echo 'reaction-cli has been installed...'
+}
+
+# taking some cues directly from the meteor install script
+
+# We wrap this whole script in a function, so that we won't execute
+# until the entire script is downloaded.
+# That's good because it prevents our output overlapping with curl's.
+# It also means that we can't run a partially downloaded script.
+# We don't indent because it would be really confusing with the heredocs.
+run_it () {
+
+# Now, on to the actual installer!
+
+## NOTE sh NOT bash. This script should be POSIX sh only, since we don't
+## know what shell the user has. Debian uses 'dash' for 'sh', for
+## example.
+
+set -e
+set -u
+
+# Let's display everything on stderr.
+exec 1>&2
+
+UNAME=$(uname)
+# Check to see if it starts with MINGW.
+if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
+  check_cmd choco
+  check_cmd helm
+  PLATFORM="os.cygwin.x86_64"
+  echo "WARNING: Cygwin is not supported for this installer at this time!"
+  exit 1
+fi
+if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
+  echo " $UNAME is a Supported OS"
+elif [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
+  echo " $UNAME is a Supported OS"
+else
+  echo " $UNAME is not a Supported OS"
+  echo "Sorry, this OS is not supported yet via this installer."
+  exit 1
+fi
+
+if [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
+  check_cmd choco
+  check_cmd helm
+  PLATFORM="os.windows.x86_64"
+  echo "WARNING: Windows is experimental for this installer at this time!"
+fi
+
+if [ "$UNAME" = "Darwin" ] ; then
+  check_cmd brew
+  ### OSX ###
+  if [ "i386" != "$(uname -p)" -o "1" != "$(sysctl -n hw.cpu64bit_capable 2>/dev/null || echo 0)" ] ; then
+    # Can't just test uname -m = x86_64, because Snow Leopard can
+    # return other values.
+    echo "Only 64-bit Intel processors are supported at this time in OSX."
+    exit 1
+  fi
+
+  PLATFORM="os.osx.x86_64"
+  echo "WARNING: OSX is experimental for this installer at this time!"
+elif [ "$UNAME" = "Linux" ] ; then
+  ### Linux ###
+  LINUX_ARCH=$(uname -m)
+  if [ "${LINUX_ARCH}" = "x86_64" ] ; then
+    PLATFORM="os.linux.x86_64"
+  else
+    echo "Unusable architecture: ${LINUX_ARCH}"
+    echo "ReactioNstall only supports x86_64 for now."
+    exit 1
+  fi
+fi
+
+
+# make reqs
+if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
+  echo linux
+  linux_install
+elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
+  echo osx
+elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
+  echo windows
+fi
+
+#reaction_full_test
+
+# End run it wrapper
+}
+
+check_cmd mktemp
+check_cmd git
+check_cmd curl
+check_cmd uname
+
+#touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
+touch ~/.bashrc
+
+run_it
