@@ -1,6 +1,9 @@
 # reactioNstall
 
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/master.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/master)
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=master)](https://travis-ci.org/joshuacox/rxNstall)
+[![Waffle.io - Columns and their card
+count](https://badge.waffle.io/joshuacox/rxNstall.svg?columns=all)](https://waffle.io/joshuacox/rxNstall)
 
 Install Reaction PDQ
 
