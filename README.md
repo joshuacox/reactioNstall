@@ -19,20 +19,25 @@ oneliner:
 curl -L https://git.io/rxNstall | bash
 ```
 
-### Supported distros
+## Supported distros
 
-#### Ubuntu
+### Ubuntu
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/ubuntu.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/ubuntu)
 
 1. trusty
 1. xenial
 1. zesty
 1. artful
 
-#### Debian
+### Debian
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/debian.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/debian)
 
 1. jessie
 1. stretch
 1. buster
+
+### RPM based
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/rpm.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/rpm)
 
 #### Centos
 
@@ -46,6 +51,11 @@ curl -L https://git.io/rxNstall | bash
 
 1. 27
 
+### Archlinux
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux)
+
+### Gentoo
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/gentoo.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/gentoo)
 
 Feel free to submit PRs, or just an issue requesting more, all issues
 welcome here.
