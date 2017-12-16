@@ -13,6 +13,9 @@ RUN ls -lh /home \
   && chown reaction. /home/reaction \
   && ls -lh /home/reaction
 
+COPY rxNstall /home/reaction/rxNstall
+RUN chown -R reaction:reaction /home/reaction
+
 USER reaction
 WORKDIR /home/reaction
 
