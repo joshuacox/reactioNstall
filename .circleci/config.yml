@@ -27,3 +27,7 @@ jobs:
       - run: /usr/bin/time -v make jessie.done
 
       - run: /usr/bin/time -v make tumbleweed.done
+
+      - run: /usr/bin/time -v make centos7.done
+
+      - run: /usr/bin/time -v make done

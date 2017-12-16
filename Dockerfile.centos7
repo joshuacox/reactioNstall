@@ -1,18 +1,14 @@
-FROM opensuse:tumbleweed
+FROM centos:7
 
-#ZYPPER_OPTS='--non-interactive --no-gpg-checks --auto-agree-with-licenses --quiet' \
+#ENV BUILD_PACKAGES='bash git wget curl locales sudo bsdtar' \
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
-    ZYPPER_OPTS='--non-interactive --no-gpg-checks --quiet' \
-    REACTIONSTALL_UPDATED=20171215
+  PS1="(centos) ${PS1}" \
+  REACTIONSTALL_UPDATED=20171215
 
-RUN  zypper $ZYPPER_OPTS update \
-  && zypper $ZYPPER_OPTS install $BUILD_PACKAGES \
-  && zypper $ZYPPER_OPTS clean
+RUN yum -yq update && yum -yq install $BUILD_PACKAGES && yum clean all
 
 RUN ls -lh /home \
   && useradd -s /bin/sh -d /home/reaction reaction \
-  && groupadd reaction \
-  && gpasswd -a reaction reaction \
   && mkdir -p /home/reaction \
   && chown reaction. /home/reaction \
   && ls -lh /home/reaction

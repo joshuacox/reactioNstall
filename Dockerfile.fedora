@@ -4,7 +4,6 @@ FROM fedora:27
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
   REACTIONSTALL_UPDATED=20171215
 
-# Updating dependencies, installing Apache and cleaning dnf caches to reduce container size
 RUN dnf -yq update && dnf -yq install $BUILD_PACKAGES && dnf clean all
 
 RUN ls -lh /home \

@@ -1,4 +1,4 @@
-all: fedora artful zesty xenial trusty buster stretch jessie tumbleweed
+all: fedora artful zesty xenial trusty buster stretch jessie tumbleweed centos7
 
 build: xenial-build
 
@@ -143,7 +143,21 @@ tumbleweed-run: clean tumbleweed-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:tumbleweed
 
-done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done
+centos7: centos7-run logs
+
+centos7.done: centos7
+	date -I > centos7.done
+
+centos7-build:
+	docker build -f Dockerfile.centos7 -t joshuacox/rxnstall:centos7 .
+
+centos7-run: clean centos7-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:centos7
+
+done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done centos7.done
 
 rm:
 	-@rm fedora.done
@@ -154,3 +168,6 @@ rm:
 	-@rm buster.done
 	-@rm stretch.done
 	-@rm jessie.done
+
+vanity:
+	curl -i https://git.io -F "url=https://raw.githubusercontent.com/joshuacox/rxNstall/master/rxNstall" -F "code=rxNstall"
