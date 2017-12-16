@@ -28,15 +28,7 @@ before_install:
 script:
 # /bin/sh points to dash on trusty, which can cause some of the tests to fail
   - ls -alh `which sh`
-  - /usr/bin/time -v make fedora.done
-  - /usr/bin/time -v make jessie.done
-  - /usr/bin/time -v make stretch.done
-  - /usr/bin/time -v make buster.done
   - /usr/bin/time -v make trusty.done
   - /usr/bin/time -v make xenial.done
   - /usr/bin/time -v make zesty.done
   - /usr/bin/time -v make artful.done
-  - /usr/bin/time -v make tumbleweed.done
-  - /usr/bin/time -v make centos7.done
-  - /usr/bin/time -v make archlinux.done
-  - /usr/bin/time -v make gentoo.done
