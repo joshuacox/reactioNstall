@@ -16,11 +16,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && useradd -s /bin/sh -d /home/reaction reaction \
   && mkdir -p /home/reaction \
   && chown reaction. /home/reaction \
+  && apt-get remove -yqq nodejs npm \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
 
-RUN apt-get remove -yqq nodejs npm
 COPY rxNstall /home/reaction/rxNstall
 RUN chown -R reaction:reaction /home/reaction
 

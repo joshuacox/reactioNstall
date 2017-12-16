@@ -1,5 +1,7 @@
 # reactioNstall
 
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/master.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/master)
+
 Install Reaction PDQ
 
 This is an UN-official install for reaction at the moment I support all

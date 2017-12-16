@@ -1,13 +1,12 @@
-FROM debian:buster
+FROM base/archlinux
 
-ENV BUILD_PACKAGES='bash git wget curl locales tar nodejs ca-certificates' \
+ENV BUILD_PACKAGES='bash git wget curl tar nodejs npm ca-certificates' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONSTALL_UPDATED=20171215
 
-RUN DEBIAN_FRONTEND=noninteractive \
-  && apt-get -qq update && apt-get -qqy dist-upgrade \
-  && apt-get -qqy --no-install-recommends install \
+RUN pacman -Syu --noconfirm \
+  && pacman -S --noconfirm \
      $BUILD_PACKAGES \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
   && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
@@ -16,10 +15,8 @@ RUN DEBIAN_FRONTEND=noninteractive \
   && useradd -s /bin/sh -d /home/reaction reaction \
   && mkdir -p /home/reaction \
   && chown reaction. /home/reaction \
-  && apt-get remove -yqq nodejs npm \
-  && apt-get -y autoremove \
-  && apt-get clean \
-  && rm -Rf /var/lib/apt/lists/*
+  && pacman -Rdd --noconfirm nodejs npm \
+  && pacman -Scc --noconfirm
 
 COPY rxNstall /home/reaction/rxNstall
 RUN chown -R reaction:reaction /home/reaction

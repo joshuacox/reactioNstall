@@ -1,4 +1,4 @@
-all: fedora artful zesty xenial trusty buster stretch jessie tumbleweed centos7
+all: fedora artful zesty xenial trusty buster stretch jessie tumbleweed centos7 archlinux
 
 build: xenial-build
 
@@ -157,7 +157,21 @@ centos7-run: clean centos7-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:centos7
 
-done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done centos7.done
+archlinux: archlinux-run logs
+
+archlinux.done: archlinux
+	date -I > archlinux.done
+
+archlinux-build:
+	docker build -f Dockerfile.archlinux -t joshuacox/rxnstall:archlinux .
+
+archlinux-run: clean archlinux-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:archlinux
+
+done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done centos7.done archlinux.done
 
 rm:
 	-@rm fedora.done
