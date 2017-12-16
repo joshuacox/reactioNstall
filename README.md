@@ -36,25 +36,26 @@ curl -L https://git.io/rxNstall | bash
 1. stretch
 1. buster
 
-### RPM based
-[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/rpm.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/rpm)
 
-#### Centos
+### Centos
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/centos.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/centos)
 
-1. 7
+1. centos7
 
-#### OpenSuse
+### OpenSuse
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/opensuse.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/opensuse)
 
 1. tumbleweed
 
-#### Fedora
+### Fedora
+[![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/fedora.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/fedora)
 
-1. 27
+1. fedora27
 
 ### Archlinux
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux)
 
-### Gentoo
+#### Gentoo
 [![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=gentoo)](https://travis-ci.org/joshuacox/rxNstall)
 
 Feel free to submit PRs, or just an issue requesting more, all issues
