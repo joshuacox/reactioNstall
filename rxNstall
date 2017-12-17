@@ -65,6 +65,8 @@ osx_install () {
   brew update
   brew install nvm
 
+  install_nvm
+
   touch ~/.bash_profile
 
   source ~/.bash_profile
