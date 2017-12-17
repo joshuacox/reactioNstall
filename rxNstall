@@ -62,12 +62,12 @@ install_nvm () {
 osx_install () {
   echo "Installing NVM on OSX"
 
-  brew update
-  brew install nvm
-
-  install_nvm
+  #brew update
+  #brew install nvm
 
   touch ~/.bash_profile
+
+  install_nvm
 
   source ~/.bash_profile
   nvm install --lts
