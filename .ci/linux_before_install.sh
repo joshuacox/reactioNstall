@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates'
+BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates time'
 
 DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \

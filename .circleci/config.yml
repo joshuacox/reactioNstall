@@ -8,12 +8,6 @@ jobs:
     steps:
       - checkout
 
-      - run: .circleci/install.sh
+      - run: sudo bash .ci/linux_before_install.sh
 
-      - run: /usr/bin/time -v make fedora.done
-
-      - run: /usr/bin/time -v make stretch.done
-
-      - run: /usr/bin/time -v make tumbleweed.done
-
-      - run: /usr/bin/time -v make centos7.done
+      - run: /usr/bin/time -v bash rxNstall
