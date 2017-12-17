@@ -113,10 +113,6 @@ linux_install () {
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
-
-  ls -lh .nvm
-  ls -lh .bashrc
-  cat .bashrc
 }
 
 # taking some cues directly from the meteor install script
