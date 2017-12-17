@@ -20,7 +20,7 @@ addons:
       - time
 
 before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .ci/linux_before_install.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash .ci/linux_before_install.sh; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then .ci/osx_before_install.sh; fi
 
 script:
