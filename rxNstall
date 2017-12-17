@@ -96,6 +96,7 @@ osx_install () {
   install_nvm
 
   source ~/.bash_profile
+  npm config delete prefix
   lts_install
   source ~/.bash_profile
 
@@ -203,6 +204,7 @@ elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
   exit 1
 fi
 
+reaction help
 #reaction_full_test
 
 # End run it wrapper
