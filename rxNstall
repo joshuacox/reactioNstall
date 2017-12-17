@@ -83,10 +83,6 @@ osx_install () {
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
-
-  ls -lh .nvm
-  ls -lh .bash_profile
-  cat .bash_profile
 }
 
 linux_install () {
