@@ -26,8 +26,9 @@ before_install:
 script:
 # /bin/sh points to dash on trusty, which can cause some of the tests to fail
   - ls -alh `which sh`
-  - bash rxNstall
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make fedora.done;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make stretch.done; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make xenial.done;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make centos7.done; fi
+  - /usr/bin/time -v bash rxNstall
+  - /usr/bin/time -v bash test

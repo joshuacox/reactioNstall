@@ -118,7 +118,11 @@ install_nvm () {
 }
 
 install_meteor () {
-  curl -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
+  #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
+  curl --silent https://install.meteor.com/ | sh
+  LINE_TO_ADD='export PATH=~/.meteor:$PATH'
+  check_if_line_exists_zshrc || add_line_to_zshrc
+  check_if_line_exists_bash_profile || add_line_to_bash_profile
 }
 
 lts_install () {
@@ -131,6 +135,7 @@ lts_install () {
 
 reaction_install () {
   install_meteor
+  source ~/.bash_profile
 
   check_cmd npm
   check_cmd node
@@ -278,7 +283,6 @@ elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
   exit 1
 fi
 
-reaction help
 #reaction_full_test
 
 # End run it wrapper
