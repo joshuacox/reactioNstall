@@ -55,7 +55,7 @@ install_nvm () {
   nvm alias default lts/carbon
 }
 
-linux_install () {
+common_install () {
   install_nvm
 
   source ~/.bashrc
@@ -72,6 +72,16 @@ linux_install () {
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
+}
+
+osx_install () {
+  echo "Installing NVM on OSX"
+  common_install
+}
+
+linux_install () {
+  echo "Installing NVM on Linux"
+  common_install
 }
 
 # taking some cues directly from the meteor install script
@@ -152,8 +162,10 @@ if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
   linux_install
 elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
   echo osx
+  osx_install
 elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
-  echo windows
+  echo windows is not support yet
+  exit 1
 fi
 
 #reaction_full_test
