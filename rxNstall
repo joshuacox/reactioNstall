@@ -64,6 +64,42 @@ install_nvm () {
 
 common_install () {
   install_nvm
+}
+
+osx_install () {
+  echo "Installing NVM on OSX"
+
+  touch ~/.bash_profile
+
+  common_install
+
+  source ~/.bash_profile
+
+  check_cmd npm
+  check_cmd node
+  chkdir $HOME/.nvm
+
+  echo -n 'npm version: '
+  npm -v
+  echo -n 'node version: '
+  node -v
+
+  echo 'Installing reaction-cli'
+  npm i -g reaction-cli
+  echo 'reaction-cli has been installed...'
+
+  ls -lh .nvm
+  ls -lh .bash_profile
+  cat .bash_profile
+}
+
+linux_install () {
+  echo "Installing NVM on Linux"
+
+  #backup_bashrc
+  touch ~/.bashrc
+
+  common_install
 
   source ~/.bashrc
 
@@ -79,19 +115,10 @@ common_install () {
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
-}
 
-osx_install () {
-  echo "Installing NVM on OSX"
-  common_install
   ls -lh .nvm
   ls -lh .bashrc
   cat .bashrc
-}
-
-linux_install () {
-  echo "Installing NVM on Linux"
-  common_install
 }
 
 # taking some cues directly from the meteor install script
@@ -187,8 +214,8 @@ check_cmd mktemp
 check_cmd git
 check_cmd curl
 check_cmd uname
+check_cmd 'grep'
+check_cmd 'sed'
 
-#backup_bashrc
-touch ~/.bashrc
 
 run_it

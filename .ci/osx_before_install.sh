@@ -4,4 +4,4 @@ echo 'OSX preinstall'
 
 # brew update
 rm ~/.bashrc
-touch ~/.bashrc
+rm ~/.bash_profile
