@@ -7,9 +7,8 @@ matrix:
       - docker
       env:
         - MINIKUBE_MEMORY=7777
-# Possible os x support in the future
-    #- os: osx
-    #  osx_image: xcode7.2
+    - os: osx
+      osx_image: xcode7.2
 
 language: bash
 
@@ -21,14 +20,14 @@ addons:
       - time
 
 before_install:
-  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .travis/ubuntu-compile-nsenter.sh && sudo cp .tmp/util-linux-2.30.2/nsenter /usr/bin; fi
-# Possible os x support in the future
-#  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then .ci/linux_before_install.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then .ci/osx_before_install.sh; fi
 
 script:
 # /bin/sh points to dash on trusty, which can cause some of the tests to fail
   - ls -alh `which sh`
-  - /usr/bin/time -v make fedora.done
-  - /usr/bin/time -v make stretch.done
-  - /usr/bin/time -v make xenial.done
-  - /usr/bin/time -v make centos7.done
+  - bash rxNstall
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make fedora.done;  fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make stretch.done; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make xenial.done;  fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make centos7.done; fi
