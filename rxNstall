@@ -59,6 +59,28 @@ install_nvm () {
   curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 }
 
+lts_install () {
+  echo "Engage nvm to install lts/carbon"
+  bash -l -c 'nvm install --lts'
+  echo "Engage nvm to alias lts/carbon to default"
+  bash -l -c 'nvm alias default lts/carbon'
+}
+
+reaction_install () {
+  check_cmd npm
+  check_cmd node
+  chkdir $HOME/.nvm
+
+  echo -n 'npm version: '
+  npm -v
+  echo -n 'node version: '
+  node -v
+
+  echo 'Installing reaction-cli'
+  npm i -g reaction-cli
+  echo 'reaction-cli has been installed...'
+}
+
 osx_install () {
   echo "Installing NVM on OSX"
 
@@ -74,23 +96,10 @@ osx_install () {
   install_nvm
 
   source ~/.bash_profile
-  echo "Engage nvm to install lts/carbon"
-  bash -l -c 'nvm install --lts'
-  echo "Engage nvm to alias lts/carbon to default"
-  bash -l -c 'nvm alias default lts/carbon'
+  lts_install
+  source ~/.bash_profile
 
-  check_cmd npm
-  check_cmd node
-  chkdir $HOME/.nvm
-
-  echo -n 'npm version: '
-  npm -v
-  echo -n 'node version: '
-  node -v
-
-  echo 'Installing reaction-cli'
-  npm i -g reaction-cli
-  echo 'reaction-cli has been installed...'
+  reaction_install
 }
 
 linux_install () {
@@ -102,23 +111,10 @@ linux_install () {
   install_nvm
 
   source ~/.bashrc
-  nvm install --lts
-  nvm alias default lts/carbon
-
+  lts_install
   source ~/.bashrc
 
-  check_cmd npm
-  check_cmd node
-  chkdir $HOME/.nvm
-
-  echo -n 'npm version: '
-  npm -v
-  echo -n 'node version: '
-  node -v
-
-  echo 'Installing reaction-cli'
-  npm i -g reaction-cli
-  echo 'reaction-cli has been installed...'
+  reaction_install
 }
 
 # taking some cues directly from the meteor install script
