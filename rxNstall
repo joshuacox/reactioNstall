@@ -66,6 +66,8 @@ osx_install () {
   #brew install nvm
 
   touch ~/.bash_profile
+  echo 'export NVM_DIR=~/.nvm' >> ~/.bash_profile
+  echo 'source ~/.nvm/nvm.sh'  >> ~/.bash_profile
 
   install_nvm
 
@@ -137,7 +139,7 @@ set -u
 exec 1>&2
 
 UNAME=$(uname)
-# Check to see if it starts with MINGW.
+
 if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   check_cmd choco
   check_cmd helm
@@ -145,6 +147,7 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   echo "WARNING: Cygwin is not supported for this installer at this time!"
   exit 1
 fi
+
 if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
   echo " $UNAME is a Supported OS"
 elif [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
@@ -155,6 +158,7 @@ else
   exit 1
 fi
 
+# Check to see if it starts with MINGW.
 if [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
   check_cmd choco
   check_cmd helm
