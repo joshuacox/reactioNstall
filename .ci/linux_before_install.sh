@@ -18,3 +18,6 @@ DEBIAN_FRONTEND=noninteractive \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
+
+rm -f ~/.bashrc
+rm -f ~/.bash_profile

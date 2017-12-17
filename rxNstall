@@ -59,16 +59,13 @@ install_nvm () {
   curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 }
 
-common_install () {
-  install_nvm
-}
-
 osx_install () {
   echo "Installing NVM on OSX"
 
-  touch ~/.bash_profile
+  brew update
+  brew install nvm
 
-  common_install
+  touch ~/.bash_profile
 
   source ~/.bash_profile
   nvm install --lts
@@ -98,7 +95,7 @@ linux_install () {
   #backup_bashrc
   touch ~/.bashrc
 
-  common_install
+  install_nvm
 
   source ~/.bashrc
   nvm install --lts
