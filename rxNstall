@@ -68,12 +68,16 @@ osx_install () {
   touch ~/.bash_profile
   echo 'export NVM_DIR=~/.nvm' >> ~/.bash_profile
   echo 'source ~/.nvm/nvm.sh'  >> ~/.bash_profile
+  #echo 'source ~/.bash_profile' >> ~/.profile
+  #echo 'source ~/.bash_profile' >> ~/.bashrc
 
   install_nvm
 
   source ~/.bash_profile
-  nvm install --lts
-  nvm alias default lts/carbon
+  echo "Engage nvm to install lts/carbon"
+  bash -l -c 'nvm install --lts'
+  echo "Engage nvm to alias lts/carbon to default"
+  bash -l -c 'nvm alias default lts/carbon'
 
   check_cmd npm
   check_cmd node
