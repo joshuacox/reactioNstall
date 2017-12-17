@@ -1,4 +1,7 @@
 #!/bin/bash
 set -e
+echo 'OSX preinstall'
 
-brew update
+# brew update
+rm ~/.bashrc
+touch ~/.bashrc

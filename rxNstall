@@ -1,8 +1,18 @@
 #!/bin/bash
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 
+backup_bashrc () {
+  mv $HOME/.bashrc $TMP_DIR/
+  touch ~/.bashrc
+}
+
+restore_bashrc () {
+  cat $TMP_DIR/.bashrc >> $HOME/.bashrc
+}
+
 killtmp () {
   cd
+#  restore_bashrc
   rm -Rf $TMP_DIR
 }
 trap killtmp EXIT
@@ -178,7 +188,7 @@ check_cmd git
 check_cmd curl
 check_cmd uname
 
-#touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
+#backup_bashrc
 touch ~/.bashrc
 
 run_it
