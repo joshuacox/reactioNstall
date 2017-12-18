@@ -2,13 +2,20 @@ FROM gentoo/stage3-amd64
 
 ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   REACTION_ROOT='/home/reaction/reaction' \
+  EMERGE_OPTS='--quiet --quiet-build' \
+  TERM=screen-256color \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONSTALL_UPDATED=20171215
 
 RUN echo emerge \
   && emerge-webrsync
 RUN emerge \
+     $EMERGE_OPTS \
      $BUILD_PACKAGES
+RUN emerge \
+     $EMERGE_OPTS \
+     --onlydeps \
+     nodejs
 RUN etc-update --automode -5 \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
   && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
