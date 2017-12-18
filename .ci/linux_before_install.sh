@@ -4,7 +4,6 @@ set -e
 BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates time'
 
 DEBIAN_FRONTEND=noninteractive \
-  && apt-get -qq update && apt-get -qqy dist-upgrade \
   && apt-get -qqy --no-install-recommends install \
      $BUILD_PACKAGES \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
