@@ -10,4 +10,6 @@ jobs:
 
       - run: sudo bash .ci/linux_before_install.sh
 
+      - run: rm -f .bash_profile .bashrc .zshrc .profile
+
       - run: bash rxNstall

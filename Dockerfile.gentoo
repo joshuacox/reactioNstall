@@ -1,18 +1,15 @@
 FROM gentoo/stage3-amd64
 
-ENV BUILD_PACKAGES='bash git wget curl tar nodejs npm ca-certificates' \
+ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONSTALL_UPDATED=20171215
 
-RUN emerge-webrsync
-RUN emerge --autounmask-write arduino; etc-update --automode -5; emerge arduino
-
 RUN echo emerge \
-  && emerge-webrsync \
-  && emerge \
-     $BUILD_PACKAGES \
-  && etc-update --automode -5 \
+  && emerge-webrsync
+RUN emerge \
+     $BUILD_PACKAGES
+RUN etc-update --automode -5 \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
   && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
   && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
