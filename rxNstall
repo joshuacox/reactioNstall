@@ -275,6 +275,7 @@ fi
 #reaction_full_test
 echo 'rxNstall has finished'
 
+exit 0
 # End run it wrapper
 }
 
