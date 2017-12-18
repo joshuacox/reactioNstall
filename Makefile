@@ -203,3 +203,6 @@ rm:
 
 vanity:
 	curl -i https://git.io -F "url=https://raw.githubusercontent.com/joshuacox/rxNstall/master/rxNstall" -F "code=rxNstall"
+
+refresher:
+	scripts/refresher

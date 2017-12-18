@@ -3,7 +3,7 @@ FROM base/archlinux
 ENV BUILD_PACKAGES='bash git wget curl tar nodejs npm ca-certificates' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONSTALL_UPDATED=20171215
+  REACTIONSTALL_UPDATED=20171218
 
 RUN pacman -Syu --noconfirm \
   && pacman -S --noconfirm \
