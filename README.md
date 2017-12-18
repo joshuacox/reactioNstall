@@ -46,6 +46,7 @@ node 8 'carbon' using nvm.
 ## Supported distros
 
 ### Ubuntu
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=ubuntu)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/ubuntu.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/ubuntu)
 
 1. trusty
@@ -54,6 +55,7 @@ node 8 'carbon' using nvm.
 1. artful
 
 ### Debian
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=debian)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/debian.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/debian)
 
 1. jessie
@@ -62,25 +64,32 @@ node 8 'carbon' using nvm.
 
 
 ### Centos
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=centos)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/centos.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/centos)
 
 1. centos7
 
 ### OpenSuse
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=opensuse)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/opensuse.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/opensuse)
 
 1. tumbleweed
 
 ### Fedora
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=fedora)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/fedora.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/fedora)
 
 1. fedora27
 
 ### Archlinux
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=archlinux)](https://travis-ci.org/joshuacox/rxNstall)
 [![CircleCI](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux.svg?style=svg)](https://circleci.com/gh/joshuacox/rxNstall/tree/archlinux)
 
-#### Gentoo
+### Gentoo
 [![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=gentoo)](https://travis-ci.org/joshuacox/rxNstall)
+
+### Mac OS X
+[![Build Status](https://travis-ci.org/joshuacox/rxNstall.svg?branch=macosx)](https://travis-ci.org/joshuacox/rxNstall)
 
 Feel free to submit PRs, or just an issue requesting more, all issues
 welcome here.

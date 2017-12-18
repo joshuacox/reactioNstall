@@ -10,4 +10,4 @@ jobs:
 
       - run: sudo bash .ci/linux_before_install.sh
 
-      - run: /usr/bin/time -v make tumbleweed.done
+      - run: /usr/bin/time -v make tumbleweed
