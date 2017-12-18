@@ -26,6 +26,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then .ci/osx_before_install.sh; fi
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make centos7.done; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make stretch.done; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then rm -f .bashrc .bash_profile .profile .zshrc; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash rxNstall; fi
