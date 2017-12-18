@@ -2,7 +2,7 @@ FROM fedora:27
 
 #ENV BUILD_PACKAGES='bash git wget curl locales sudo bsdtar' \
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
-  REACTIONSTALL_UPDATED=20171215
+  REACTIONSTALL_UPDATED=20171218
 
 RUN dnf -yq update && dnf -yq install $BUILD_PACKAGES && dnf clean all
 
