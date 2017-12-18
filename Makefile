@@ -188,14 +188,18 @@ archlinux-run: clean archlinux-build
 done: fedora.done artful.done zesty.done xenial.done trusty.done buster.done stretch.done jessie.done tumbleweed.done centos7.done archlinux.done gentoo.done
 
 rm:
-	-@rm fedora.done
-	-@rm artful.done
-	-@rm zesty.done
-	-@rm xenial.done
-	-@rm trusty.done
-	-@rm buster.done
-	-@rm stretch.done
-	-@rm jessie.done
+	-@rm -f fedora.done
+	-@rm -f artful.done
+	-@rm -f zesty.done
+	-@rm -f xenial.done
+	-@rm -f trusty.done
+	-@rm -f buster.done
+	-@rm -f stretch.done
+	-@rm -f jessie.done
+	-@rm -f tumbleweed.done
+	-@rm -f centos7.done
+	-@rm -f archlinux.done
+	-@rm -f gentoo.done
 
 vanity:
 	curl -i https://git.io -F "url=https://raw.githubusercontent.com/joshuacox/rxNstall/master/rxNstall" -F "code=rxNstall"
