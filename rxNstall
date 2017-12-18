@@ -133,7 +133,7 @@ osx_install () {
 
   install_nvm
 
-  dotfiles_install
+#  dotfiles_install
 
   source ~/.bash_profile
   npm config delete prefix
