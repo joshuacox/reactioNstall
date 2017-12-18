@@ -135,6 +135,7 @@ osx_install () {
 
 #  dotfiles_install
 
+  touch ~/.bash_profile
   source ~/.bash_profile
   npm config delete prefix
   lts_install
