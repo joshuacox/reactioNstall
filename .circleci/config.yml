@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
 
-      - run: .circleci/install.sh
+      - run: sudo bash .ci/linux_before_install.sh
 
       - run: /usr/bin/time -v make buster.done
 
