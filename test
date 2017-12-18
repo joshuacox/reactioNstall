@@ -1,3 +1,21 @@
 #!/bin/bash -l
-source ~/.bashrc
+echo test
+TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
+
+killtmp () {
+  cd
+#  restore_bashrc
+  rm -Rf $TMP_DIR
+}
+
+trap killtmp EXIT
+source ~/.bash_profile
+cd $TMP_DIR
+
 reaction help
+#echo init reaction
+#reaction init
+#cd reaction
+#echo test reaction
+#reaction test
+#cd
