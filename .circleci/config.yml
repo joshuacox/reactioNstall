@@ -10,8 +10,8 @@ jobs:
 
       - run: sudo bash .ci/linux_before_install.sh
 
-      - run: /usr/bin/time -v make buster.done
+      - run: /usr/bin/time -v make buster
 
-      - run: /usr/bin/time -v make stretch.done
+      - run: /usr/bin/time -v make stretch
 
-      - run: /usr/bin/time -v make jessie.done
+      - run: /usr/bin/time -v make jessie
