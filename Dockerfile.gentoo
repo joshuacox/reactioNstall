@@ -12,9 +12,12 @@ RUN echo emerge \
 RUN emerge \
      $EMERGE_OPTS \
      $BUILD_PACKAGES
+RUN emerge -C openssh
 RUN emerge \
      $EMERGE_OPTS \
      --onlydeps \
+     --autounmask-write \
+     --autounmask-backtrack=y \
      nodejs
 RUN etc-update --automode -5 \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
