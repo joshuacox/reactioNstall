@@ -284,6 +284,7 @@ elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
 fi
 
 #reaction_full_test
+echo 'rxNstall has finished'
 
 # End run it wrapper
 }

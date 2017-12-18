@@ -1,4 +1,5 @@
 #!/bin/bash -l
+echo test
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 
 killtmp () {
