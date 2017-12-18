@@ -1,0 +1,35 @@
+#!/bin/bash
+
+refresh_it () {
+  git checkout $BRANCH
+  echo $DISTROS | xargs -n1 -I{} bash -c "scripts/refresh {}"
+}
+
+BRANCH=archlinux
+DISTROS=archlinux
+refresh_it
+
+BRANCH=centos
+DISTROS=centos7
+refresh_it
+BRANCH=debian
+DISTROS='buster jessie stretch'
+refresh_it
+BRANCH=fedora
+DISTROS='fedora'
+refresh_it
+BRANCH=gentoo
+DISTROS='gentoo'
+refresh_it
+BRANCH=macosx
+DISTROS='macosx'
+refresh_it
+BRANCH=master
+DISTROS='master'
+refresh_it
+BRANCH=opensuse
+DISTROS='tumbleweed'
+refresh_it
+BRANCH=ubuntu
+DISTROS='artful trusty xenial zesty'
+refresh_it
