@@ -147,6 +147,7 @@ nvm_dir_adds () {
   check_if_line_exists_bash_profile || add_line_to_bash_profile
 }
 dotfiles_install () {
+  echo 'Adjusting dotfiles'
   touch ~/.zshrc
   touch ~/.bashrc
   touch ~/.bash_profile

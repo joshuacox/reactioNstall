@@ -29,5 +29,6 @@ WORKDIR /home/reaction
 
 RUN /bin/bash -l ./rxNstall
 
-COPY test /test
-CMD [ "/bin/bash", "-l", "/test" ]
+#COPY test /test
+#CMD [ "/bin/bash", "-l", "/test" ]
+CMD [ "/bin/bash", "-l", "reaction", "help" ]
