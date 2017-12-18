@@ -1,7 +1,11 @@
 #!/bin/bash
-TMP_DIR=$(mktemp -d --suffix='.reactioNstall')
+TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
+METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
+PS1="(rxnstall) ${PS1}" \
+
 killtmp () {
   cd
+#  restore_bashrc
   rm -Rf $TMP_DIR
 }
 trap killtmp EXIT
@@ -39,25 +43,48 @@ reaction test
 cd
 }
 
-install_nvm () {
-  echo "installing nvm"
-  wget https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh
-  ls -lh install.sh
-  cat install.sh
-  bash install.sh
-  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
-  source ~/.bashrc
-  ls -lh .nvm
-  ls -lh .bashrc
-  cat .bashrc
-  nvm install --lts
-  nvm alias default lts/carbon
+LINE_TO_ADD=''
+TARGET_FILE_FOR_ADD=~/.profile
+
+check_if_line_exists()
+{
+    grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
-linux_install () {
-  install_nvm
+add_line_to()
+{
+  TARGET_FILE=$TARGET_FILE_FOR_ADD
+    [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
+    printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
+}
 
-  source ~/.bashrc
+install_nvm () {
+  echo "installing nvm"
+  touch ~/.profile
+  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+}
+
+install_meteor () {
+  #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
+  curl --silent https://install.meteor.com/ | sh
+  LINE_TO_ADD='export PATH=~/.meteor:$PATH'
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+}
+
+lts_install () {
+  bash -l -c 'command -v nvm'
+  echo "Engage nvm to install lts/carbon"
+  bash -l -c 'nvm install --lts'
+  echo "Engage nvm to alias lts/carbon to default"
+  bash -l -c 'nvm alias default lts/carbon'
+}
+
+reaction_install () {
+  install_meteor
+  source ~/.bash_profile
 
   check_cmd npm
   check_cmd node
@@ -71,6 +98,62 @@ linux_install () {
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
+}
+nvm_dir_adds () {
+  LINE_TO_ADD='export NVM_DIR=~/.nvm'
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
+
+  LINE_TO_ADD='source ~/.nvm/nvm.sh'
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
+}
+dotfiles_install () {
+  echo 'Adjusting dotfiles'
+  touch ~/.zshrc
+  touch ~/.bashrc
+  touch ~/.bash_profile
+  touch ~/.profile
+  LINE_TO_ADD='source ~/.profile'
+  TARGET_FILE_FOR_ADD=~/.bashrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
+}
+
+osx_install () {
+  echo "Installing NVM on OSX"
+
+  install_nvm
+
+  dotfiles_install
+
+  source ~/.bash_profile
+  npm config delete prefix
+  lts_install
+  source ~/.bash_profile
+
+  reaction_install
+}
+
+linux_install () {
+  echo "Installing NVM on Linux"
+
+  install_nvm
+
+  dotfiles_install
+
+  source ~/.bash_profile
+  lts_install
+  source ~/.bash_profile
+
+  reaction_install
 }
 
 # taking some cues directly from the meteor install script
@@ -95,7 +178,7 @@ set -u
 exec 1>&2
 
 UNAME=$(uname)
-# Check to see if it starts with MINGW.
+
 if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   check_cmd choco
   check_cmd helm
@@ -103,6 +186,7 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   echo "WARNING: Cygwin is not supported for this installer at this time!"
   exit 1
 fi
+
 if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
   echo " $UNAME is a Supported OS"
 elif [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
@@ -113,6 +197,7 @@ else
   exit 1
 fi
 
+# Check to see if it starts with MINGW.
 if [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
   check_cmd choco
   check_cmd helm
@@ -151,12 +236,16 @@ if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
   linux_install
 elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
   echo osx
+  osx_install
 elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
-  echo windows
+  echo windows is not support yet
+  exit 1
 fi
 
 #reaction_full_test
+echo 'rxNstall has finished'
 
+exit 0
 # End run it wrapper
 }
 
@@ -164,8 +253,8 @@ check_cmd mktemp
 check_cmd git
 check_cmd curl
 check_cmd uname
+check_cmd 'grep'
+check_cmd 'sed'
 
-#touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
-touch ~/.bashrc
 
 run_it
