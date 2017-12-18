@@ -33,4 +33,3 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make xenial.done;  fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make centos7.done; fi
   - bash rxNstall
-  - bash test
