@@ -1,0 +1,8 @@
+#!/bin/bash
+DATE=$(date +%Y%m%d)
+FORTUNE=$(fortune -s|sed 's/"//g')
+PHRASE_X=REACTIONSTALL_UPDATED
+
+git pull
+sed -i "s/^\ \ $PHRASE_X=.*$/  $PHRASE_X=$DATE/" Dockerfile.$1
+git commit -am "$FORTUNE -- $DATE"
