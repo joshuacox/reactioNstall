@@ -3,9 +3,10 @@ FROM centos:7
 #ENV BUILD_PACKAGES='bash git wget curl locales sudo bsdtar' \
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
   PS1="(centos) ${PS1}" \
+  YUM_OPTS="-y -q -e 0" \
   REACTIONSTALL_UPDATED=20171215
 
-RUN yum -yq update && yum -yq install $BUILD_PACKAGES && yum clean all
+RUN yum $YUM_OPTS update && yum $YUM_OPTS install $BUILD_PACKAGES && yum clean all
 
 RUN ls -lh /home \
   && useradd -s /bin/sh -d /home/reaction reaction \
@@ -22,6 +23,5 @@ WORKDIR /home/reaction
 RUN rm .bashrc
 RUN /bin/bash -l ./rxNstall
 
-#COPY test /test
-#CMD [ "/bin/bash", "-l", "/test" ]
-CMD [ "/bin/bash", "-l", "reaction", "help" ]
+COPY test /test
+CMD [ "/test" ]

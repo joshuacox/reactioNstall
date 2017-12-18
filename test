@@ -13,9 +13,9 @@ source ~/.bash_profile
 cd $TMP_DIR
 
 reaction help
-echo init reaction
-reaction init
-cd reaction
-echo test reaction
-reaction test
-cd
+#echo init reaction
+#reaction init
+#cd reaction
+#echo test reaction
+#reaction test
+#cd

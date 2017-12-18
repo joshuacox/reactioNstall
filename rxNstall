@@ -43,58 +43,18 @@ reaction test
 cd
 }
 
+LINE_TO_ADD=''
+TARGET_FILE_FOR_ADD=~/.profile
 
-LINE_TO_ADD='eval `keychain --agents "gpg,ssh" --dir ~/.ssh/keychain --eval id_rsa id_dsa id_ecdsa 4157F971`'
-ZSHRC_LOCATION=~/.zshrc
-BASHRC_LOCATION=~/.bashrc
-BASH_PROFILE_LOCATION=~/.bash_profile
-PROFILE_LOCATION=~/.profile
-
-check_if_line_exists_zshrc()
+check_if_line_exists()
 {
-    grep -qsFx "$LINE_TO_ADD" $ZSHRC_LOCATION
+    grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
-add_line_to_zshrc()
+add_line_to()
 {
-  TARGET_FILE=$ZSHRC_LOCATION
-    [ -w "$TARGET_FILE" ] || TARGET_FILE=$ZSHRC_LOCATION
-    printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
-}
-
-check_if_line_exists_bashrc()
-{
-    grep -qsFx "$LINE_TO_ADD" $BASHRC_LOCATION
-}
-
-add_line_to_bashrc()
-{
-  TARGET_FILE=$BASHRC_LOCATION
-    [ -w "$TARGET_FILE" ] || TARGET_FILE=$BASHRC_LOCATION
-    printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
-}
-
-check_if_line_exists_bash_profile()
-{
-    grep -qsFx "$LINE_TO_ADD" $BASH_PROFILE_LOCATION
-}
-
-add_line_to_bash_profile()
-{
-  TARGET_FILE=$BASH_PROFILE_LOCATION
-    [ -w "$TARGET_FILE" ] || TARGET_FILE=$BASH_PROFILE_LOCATION
-    printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
-}
-
-check_if_line_exists_profile()
-{
-    grep -qsFx "$LINE_TO_ADD" $PROFILE_LOCATION
-}
-
-add_line_to_profile()
-{
-  TARGET_FILE=$PROFILE_LOCATION
-    [ -w "$TARGET_FILE" ] || TARGET_FILE=$PROFILE_LOCATION
+  TARGET_FILE=$TARGET_FILE_FOR_ADD
+    [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
     printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
 }
 
@@ -108,8 +68,10 @@ install_meteor () {
   #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
   curl --silent https://install.meteor.com/ | sh
   LINE_TO_ADD='export PATH=~/.meteor:$PATH'
-  check_if_line_exists_zshrc || add_line_to_zshrc
-  check_if_line_exists_bash_profile || add_line_to_bash_profile
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
 }
 
 lts_install () {
@@ -139,12 +101,16 @@ reaction_install () {
 }
 nvm_dir_adds () {
   LINE_TO_ADD='export NVM_DIR=~/.nvm'
-  check_if_line_exists_zshrc || add_line_to_zshrc
-  check_if_line_exists_bash_profile || add_line_to_bash_profile
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
 
   LINE_TO_ADD='source ~/.nvm/nvm.sh'
-  check_if_line_exists_zshrc || add_line_to_zshrc
-  check_if_line_exists_bash_profile || add_line_to_bash_profile
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
 }
 dotfiles_install () {
   echo 'Adjusting dotfiles'
@@ -153,9 +119,12 @@ dotfiles_install () {
   touch ~/.bash_profile
   touch ~/.profile
   LINE_TO_ADD='source ~/.profile'
-  check_if_line_exists_bashrc || add_line_to_bashrc
-  check_if_line_exists_zshrc || add_line_to_zshrc
-  check_if_line_exists_bash_profile || add_line_to_bash_profile
+  TARGET_FILE_FOR_ADD=~/.bashrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.zshrc
+  check_if_line_exists || add_line_to
+  TARGET_FILE_FOR_ADD=~/.bash_profile
+  check_if_line_exists || add_line_to
 }
 
 osx_install () {
