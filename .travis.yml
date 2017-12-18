@@ -6,9 +6,11 @@ matrix:
       services:
       - docker
       env:
-        - MINIKUBE_MEMORY=7777
+        - TOOL_NODE_FLAGS="--max-old-space-size=2048"
     - os: osx
       osx_image: xcode7.2
+      env:
+        - TOOL_NODE_FLAGS="--max-old-space-size=2048"
 
 language: bash
 
