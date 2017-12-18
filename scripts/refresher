@@ -1,0 +1,4 @@
+#!/bin/bash
+DISTROS=$(ls Dockerfile.*|sed 's/Dockerfile.//'| tr "\n" ' ')
+
+echo $DISTROS | xargs -n1 -I{} bash -c "git checkout {};scripts/refresh {}"
