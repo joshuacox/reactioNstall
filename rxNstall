@@ -2,6 +2,7 @@
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
 TERM=${TERM:-screen-256color}
+FIX_DOTFILES=${FIX_DOTFILES:-false}
 COLORTERM=${COLORTERM:-gnome-256color}
 PS1="(rxnstall) ${PS1}"
 
@@ -110,6 +111,7 @@ reaction_install () {
   npm i -g reaction-cli
   echo 'reaction-cli has been installed...'
 }
+
 nvm_dir_adds () {
   LINE_TO_ADD='export NVM_DIR=~/.nvm'
   TARGET_FILE_FOR_ADD=~/.zshrc
@@ -123,6 +125,7 @@ nvm_dir_adds () {
   TARGET_FILE_FOR_ADD=~/.bash_profile
   check_if_line_exists || add_line_to
 }
+
 dotfiles_install () {
   echo 'Adjusting dotfiles'
   touch ~/.zshrc
@@ -143,6 +146,10 @@ osx_install () {
 
   install_nvm
 
+  if [ $FIX_DOTFILES = 'true' ]; then
+    dotfiles_install
+  fi
+
   echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
@@ -155,7 +162,9 @@ linux_install () {
 
   install_nvm
 
-  # dotfiles_install
+  if [ $FIX_DOTFILES = 'true' ]; then
+    dotfiles_install
+  fi
 
   lts_install
 
@@ -253,6 +262,7 @@ elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
 fi
 
 #reaction_full_test
+reaction help
 echo 'rxNstall has finished'
 
 exit 0
