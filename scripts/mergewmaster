@@ -11,4 +11,4 @@ cp .travis.yml $TMP_DIR/
 cp .circleci/config.yml $TMP_DIR/
 git merge master
 cp $TMP_DIR/.travis.yml ./
-cp $TMP_DIR/config.yml ./.circle/
+cp $TMP_DIR/config.yml ./.circleci/
