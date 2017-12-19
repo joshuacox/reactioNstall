@@ -42,6 +42,7 @@ reaction_full_test () {
   cd
 }
 
+# these vars are used by the following functions
 LINE_TO_ADD=''
 TARGET_FILE_FOR_ADD=~/.profile
 
@@ -141,12 +142,13 @@ dotfiles_install () {
   touch ~/.bashrc
   touch ~/.bash_profile
   touch ~/.profile
-  LINE_TO_ADD='source ~/.profile'
-  TARGET_FILE_FOR_ADD=~/.bashrc
+  LINE_TO_ADD="source ~/.bashrc"
+  TARGET_FILE_FOR_ADD=~/.bash_profile
   check_if_line_exists || add_line_to
+  LINE_TO_ADD="source ~/.profile"
   TARGET_FILE_FOR_ADD=~/.zshrc
   check_if_line_exists || add_line_to
-  TARGET_FILE_FOR_ADD=~/.bash_profile
+  TARGET_FILE_FOR_ADD=~/.bashrc
   check_if_line_exists || add_line_to
 }
 
