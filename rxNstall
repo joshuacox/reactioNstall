@@ -1,9 +1,6 @@
 #!/bin/bash
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
-TERM=${TERM:-screen-256color}
-COLORTERM=${COLORTERM:-gnome-256color}
-PS1="(rxnstall) ${PS1}"
 
 killtmp () {
   cd
