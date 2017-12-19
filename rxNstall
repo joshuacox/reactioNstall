@@ -80,11 +80,15 @@ install_meteor () {
 
 lts_install () {
   echo 'Installing Node 8 LTS/carbon'
-  bash -l -c 'command -v nvm'
+  
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  
   echo "Engage nvm to install lts/carbon"
-  bash -l -c 'nvm install --lts'
+  nvm install --lts
   echo "Engage nvm to alias lts/carbon to default"
-  bash -l -c 'nvm alias default lts/carbon'
+  nvm alias default lts/carbon
 }
 
 reaction_install () {
@@ -140,9 +144,10 @@ osx_install () {
 
   dotfiles_install
 
-  echo 'Resource .bash_profile'
-  touch ~/.bash_profile
-  source ~/.bash_profile
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
   echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
