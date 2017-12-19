@@ -138,7 +138,7 @@ osx_install () {
 
   install_nvm
 
-#  dotfiles_install
+  dotfiles_install
 
   touch ~/.bash_profile
   source ~/.bash_profile
