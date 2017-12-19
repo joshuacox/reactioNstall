@@ -174,7 +174,8 @@ linux_install () {
   reaction_install
 }
 
-# taking some cues directly from the meteor install script
+#### taking some cues directly from the meteor install script
+#### my comments will have four shi '####'
 
 # We wrap this whole script in a function, so that we won't execute
 # until the entire script is downloaded.
@@ -182,20 +183,6 @@ linux_install () {
 # It also means that we can't run a partially downloaded script.
 # We don't indent because it would be really confusing with the heredocs.
 run_it () {
-
-# Now, on to the actual installer!
-
-#### Note: NVM is a bash function so I'm sticking to bash for this one
-## NOTE sh NOT bash. This script should be POSIX sh only, since we don't
-## know what shell the user has. Debian uses 'dash' for 'sh', for
-## example.
-
-#### NVM is not compatible with -e and -u
-#### see:
-#### https://github.com/creationix/nvm/issues/865#issuecomment-146948066
-####set -e
-####set -u
-
 # Let's display everything on stderr.
 exec 1>&2
 
