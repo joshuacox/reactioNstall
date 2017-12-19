@@ -157,6 +157,20 @@ centos7-run: clean centos7-build
 		--cidfile .rxnstall.cid \
 		joshuacox/rxnstall:centos7
 
+genteeded: genteeded-run logs
+
+genteeded.done: genteeded
+	date -I > genteeded.done
+
+genteeded-build:
+	docker build -f Dockerfile.genteeded -t joshuacox/rxnstall:genteeded .
+
+genteeded-run: clean genteeded-build
+	docker run \
+		-d \
+		--cidfile .rxnstall.cid \
+		joshuacox/rxnstall:genteeded
+
 gentoo: gentoo-run logs
 
 gentoo.done: gentoo
