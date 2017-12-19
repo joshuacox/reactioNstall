@@ -23,3 +23,6 @@ reaction help
 #echo test reaction
 #reaction test
 #cd
+which node
+which npm
+echo 'end tests'
