@@ -2,6 +2,7 @@
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
 TERM=${TERM:-screen-256color}
+COLORTERM=${COLORTERM:-gnome-256color}
 PS1="(rxnstall) ${PS1}"
 
 killtmp () {
@@ -80,11 +81,12 @@ install_meteor () {
 
 lts_install () {
   echo 'Installing Node 8 LTS/carbon'
-  
+
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  
+
+  nvm ls-remote --lts
   echo "Engage nvm to install lts/carbon"
   nvm install --lts
   echo "Engage nvm to alias lts/carbon to default"
@@ -185,8 +187,8 @@ run_it () {
 ## know what shell the user has. Debian uses 'dash' for 'sh', for
 ## example.
 
-set -e
-set -u
+#set -e
+#set -u
 
 # Let's display everything on stderr.
 exec 1>&2
