@@ -2,6 +2,7 @@
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
 TERM=${TERM:-screen-256color}
+COLORTERM=${COLORTERM:-gnome-256color}
 PS1="(rxnstall) ${PS1}"
 
 killtmp () {
@@ -34,14 +35,14 @@ chkdir () {
 }
 
 reaction_full_test () {
-cd $TMP_DIR
-reaction help
-echo init reaction
-reaction init
-cd reaction
-echo test reaction
-reaction test
-cd
+  cd $TMP_DIR
+  reaction help
+  echo init reaction
+  reaction init
+  cd reaction
+  echo test reaction
+  reaction test
+  cd
 }
 
 LINE_TO_ADD=''
@@ -49,11 +50,13 @@ TARGET_FILE_FOR_ADD=~/.profile
 
 check_if_line_exists()
 {
-    grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
+  echo "Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
+  grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
 add_line_to()
 {
+  echo "Adding '$LINE_TO_ADD'  to $TARGET_FILE_FOR_ADD"
   TARGET_FILE=$TARGET_FILE_FOR_ADD
     [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
     printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
@@ -66,6 +69,7 @@ install_nvm () {
 }
 
 install_meteor () {
+  echo 'Installing meteor'
   #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
   curl --silent https://install.meteor.com/ | sh
   LINE_TO_ADD='export PATH=~/.meteor:$PATH'
@@ -76,17 +80,23 @@ install_meteor () {
 }
 
 lts_install () {
-  bash -l -c 'command -v nvm'
+  echo 'Installing Node 8 LTS/carbon'
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+  nvm ls-remote --lts
   echo "Engage nvm to install lts/carbon"
-  bash -l -c 'nvm install --lts'
+  nvm install --lts
   echo "Engage nvm to alias lts/carbon to default"
-  bash -l -c 'nvm alias default lts/carbon'
+  nvm alias default lts/carbon
 }
 
 reaction_install () {
   install_meteor
-  source ~/.bash_profile
 
+  echo 'Check npm and node are present'
   check_cmd npm
   check_cmd node
   chkdir $HOME/.nvm
@@ -133,12 +143,9 @@ osx_install () {
 
   install_nvm
 
-  dotfiles_install
-
-  source ~/.bash_profile
+  echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
-  source ~/.bash_profile
 
   reaction_install
 }
@@ -148,11 +155,9 @@ linux_install () {
 
   install_nvm
 
-  dotfiles_install
+  # dotfiles_install
 
-  source ~/.bash_profile
   lts_install
-  source ~/.bash_profile
 
   reaction_install
 }
@@ -168,12 +173,16 @@ run_it () {
 
 # Now, on to the actual installer!
 
+#### Note: NVM is a bash function so I'm sticking to bash for this one
 ## NOTE sh NOT bash. This script should be POSIX sh only, since we don't
 ## know what shell the user has. Debian uses 'dash' for 'sh', for
 ## example.
 
-set -e
-set -u
+#### NVM is not compatible with -e and -u
+#### see:
+#### https://github.com/creationix/nvm/issues/865#issuecomment-146948066
+####set -e
+####set -u
 
 # Let's display everything on stderr.
 exec 1>&2
