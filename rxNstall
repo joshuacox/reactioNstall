@@ -146,14 +146,9 @@ osx_install () {
 
   dotfiles_install
 
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
   echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
-  source ~/.bash_profile
 
   reaction_install
 }
