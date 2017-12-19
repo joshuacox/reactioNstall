@@ -251,6 +251,8 @@ fi
 #reaction_full_test
 reaction help
 echo 'rxNstall has finished'
+echo ''
+echo 'Notice you should open a new terminal now or `source .bashrc` now'
 
 if [ "$REACTION_FULL_TEST" = "true" ]; then
   reaction_full_test
