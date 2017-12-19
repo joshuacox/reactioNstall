@@ -95,7 +95,6 @@ lts_install () {
 
 reaction_install () {
   install_meteor
-  source ~/.bash_profile
 
   echo 'Check npm and node are present'
   check_cmd npm
@@ -144,8 +143,6 @@ osx_install () {
 
   install_nvm
 
-  dotfiles_install
-
   echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
@@ -160,9 +157,7 @@ linux_install () {
 
   dotfiles_install
 
-  source ~/.bash_profile
   lts_install
-  source ~/.bash_profile
 
   reaction_install
 }
