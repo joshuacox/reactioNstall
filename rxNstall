@@ -49,11 +49,13 @@ TARGET_FILE_FOR_ADD=~/.profile
 
 check_if_line_exists()
 {
-    grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
+  echo "Checking for $LINE_TO_ADD  in $TARGET_FILE_FOR_ADD"
+  grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
 add_line_to()
 {
+  echo "Adding $LINE_TO_ADD  to $TARGET_FILE_FOR_ADD"
   TARGET_FILE=$TARGET_FILE_FOR_ADD
     [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
     printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
@@ -66,6 +68,7 @@ install_nvm () {
 }
 
 install_meteor () {
+  echo 'Installing meteor'
   #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
   curl --silent https://install.meteor.com/ | sh
   LINE_TO_ADD='export PATH=~/.meteor:$PATH'
@@ -76,6 +79,7 @@ install_meteor () {
 }
 
 lts_install () {
+  echo 'Installing Node 8 LTS/carbon'
   bash -l -c 'command -v nvm'
   echo "Engage nvm to install lts/carbon"
   bash -l -c 'nvm install --lts'
@@ -87,6 +91,7 @@ reaction_install () {
   install_meteor
   source ~/.bash_profile
 
+  echo 'Check npm and node are present'
   check_cmd npm
   check_cmd node
   chkdir $HOME/.nvm
