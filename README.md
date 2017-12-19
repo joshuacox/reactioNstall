@@ -93,3 +93,28 @@ node 8 'carbon' using nvm.
 
 Feel free to submit PRs, or just an issue requesting more, all issues
 welcome here.
+
+### Env vars
+
+I have some functions for enforcing issues I've had to work around on
+various installs. They can be enabled by setting a few environment
+variables to 'true' (the string).
+
+
+```
+export FIX_DOTFILES='true'
+```
+
+This will fix some dotfile issues
+
+```
+export NVM_DIR_ADDS='true'
+```
+
+This is an alternative and can be used in addition to the first
+
+```
+export FIX_NVM_PREFIX='true'
+```
+
+This one I use to make travis-ci's Mac OS X npm prefix go away
