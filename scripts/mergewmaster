@@ -1,0 +1,14 @@
+#!/bin/bash
+TMP_DIR=$(mktemp -d --suffix='.mergewmaster.tmp' 2>/dev/null || mktemp -d -t '.mergewmaster.tmp')
+
+killtmp () {
+  cd
+  rm -Rf $TMP_DIR
+}
+trap killtmp EXIT
+
+cp .travis.yml $TMP_DIR/
+cp .circleci/config.yml $TMP_DIR/
+git merge master
+cp $TMP_DIR/.travis.yml ./
+cp $TMP_DIR/config.yml ./.circleci/
