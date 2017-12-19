@@ -1,0 +1,19 @@
+FROM joshuacox/rxnstall:gentoo
+
+ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
+  REACTION_ROOT='/home/reaction/reaction' \
+  EMERGE_OPTS='--quiet --quiet-build' \
+  TERM=screen-256color \
+  TOOL_NODE_FLAGS="--max-old-space-size=2048" \
+  REACTIONSTALL_UPDATED=20171218
+
+COPY rxNstall /home/reaction/rxNstall
+RUN chown -R reaction:reaction /home/reaction
+
+USER reaction
+WORKDIR /home/reaction
+
+RUN /bin/bash -l ./rxNstall
+
+COPY test /test
+CMD [ "/test" ]
