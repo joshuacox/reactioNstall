@@ -19,5 +19,4 @@ before_install:
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash rxNstall; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash test; fi
-    # - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash -l -c 'reaction help'; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then reaction help; fi
