@@ -30,3 +30,8 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then /usr/bin/time -v make stretch; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash rxNstall; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]];   then bash test; fi
+  - touch .bashrc .bash_profile .zshrc .profile
+  - echo '# bashrc'; cat .bashrc
+  - echo '# zshrc'; cat .zshrc
+  - echo '# bash_profile'; cat .bash_profile
+  - echo '# profile'; cat .profile

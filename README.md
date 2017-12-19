@@ -97,7 +97,8 @@ welcome here.
 ### Env vars
 
 I have some functions for enforcing issues I've had to work around on
-various installs
+various installs. They can be enabled by setting a few environment
+variables to 'true' (the string).
 
 
 ```

@@ -64,15 +64,15 @@ install_nvm () {
   touch ~/.profile
   curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 
-  if [ $FIX_DOTFILES = 'true' ]; then
+  if [ "$FIX_DOTFILES" = "true" ]; then
     dotfiles_install
   fi
 
-  if [ $NVM_DIR_ADDS = 'true' ]; then
+  if [ "$NVM_DIR_ADDS" = "true" ]; then
     nvm_dir_adds
   fi
 
-  if [ $FIX_NVM_PREFIX = 'true' ]; then
+  if [ "$FIX_NVM_PREFIX" = "true" ]; then
     echo 'npm config delete prefix'
     npm config delete prefix
   fi
@@ -252,7 +252,7 @@ fi
 reaction help
 echo 'rxNstall has finished'
 
-if [ $REACTION_FULL_TEST = 'true' ]; then
+if [ "$REACTION_FULL_TEST" = "true" ]; then
   reaction_full_test
 fi
 
