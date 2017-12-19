@@ -1,0 +1,4 @@
+#!/bin/bash
+BRANCHES='archlinux centos debian fedora gentoo macosx opensuse ubuntu'
+
+echo $BRANCHES |tr ' ' '\n'| xargs -n1 -I{} bash -c "git checkout {} ; scripts/mergewmaster"
