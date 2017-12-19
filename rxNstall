@@ -49,13 +49,13 @@ TARGET_FILE_FOR_ADD=~/.profile
 
 check_if_line_exists()
 {
-  echo "Checking for $LINE_TO_ADD  in $TARGET_FILE_FOR_ADD"
+  echo "Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
   grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
 add_line_to()
 {
-  echo "Adding $LINE_TO_ADD  to $TARGET_FILE_FOR_ADD"
+  echo "Adding '$LINE_TO_ADD'  to $TARGET_FILE_FOR_ADD"
   TARGET_FILE=$TARGET_FILE_FOR_ADD
     [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
     printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
@@ -140,8 +140,10 @@ osx_install () {
 
   dotfiles_install
 
+  echo 'Resource .bash_profile'
   touch ~/.bash_profile
   source ~/.bash_profile
+  echo 'npm config delete prefix'
   npm config delete prefix
   lts_install
   source ~/.bash_profile
