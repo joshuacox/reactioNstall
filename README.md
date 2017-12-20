@@ -99,8 +99,7 @@ welcome here.
 This gives an example of successful run to help troubleshoot runs that
 are not successful
 
-<script src="https://asciinema.org/a/BRekluHnW58avWGUANhu648n5.js"
-id="asciicast-BRekluHnW58avWGUANhu648n5" async></script>
+[![asciicast](https://asciinema.org/a/BRekluHnW58avWGUANhu648n5.png)](https://asciinema.org/a/BRekluHnW58avWGUANhu648n5)
 
 ### Env vars
 
