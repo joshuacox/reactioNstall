@@ -8,18 +8,18 @@ ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   REACTIONSTALL_UPDATED=20171218
 
 RUN echo emerge \
-  && emerge-webrsync
-RUN emerge \
+  && emerge-webrsync \
+  && emerge \
      $EMERGE_OPTS \
-     $BUILD_PACKAGES
-RUN emerge -C openssh
-RUN emerge \
+     $BUILD_PACKAGES \
+  && emerge -C openssh \
+  && emerge \
      $EMERGE_OPTS \
      --onlydeps \
      --autounmask-write \
      --autounmask-backtrack=y \
-     nodejs
-RUN etc-update --automode -5 \
+     nodejs \
+  && etc-update --automode -5 \
   && echo 'en_US.ISO-8859-15 ISO-8859-15'>>/etc/locale.gen \
   && echo 'en_US ISO-8859-1'>>/etc/locale.gen \
   && echo 'en_US.UTF-8 UTF-8'>>/etc/locale.gen \
