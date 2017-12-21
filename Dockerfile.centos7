@@ -4,7 +4,7 @@ FROM centos:7
 ENV BUILD_PACKAGES='bash git wget curl sudo tar nodejs npm' \
   PS1="(centos) ${PS1}" \
   YUM_OPTS="-y -q -e 0" \
-  REACTIONSTALL_UPDATED=20171218
+  REACTIONSTALL_UPDATED=20171221
 
 RUN yum $YUM_OPTS update && yum $YUM_OPTS install $BUILD_PACKAGES && yum clean all
 
