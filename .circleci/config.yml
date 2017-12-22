@@ -4,7 +4,8 @@ jobs:
   build:
     machine: true
     environment:
-      MINIKUBE_OPTS: "--vm-driver=none"
+      FIX_NVM_PREFIX: "true"
+      FIX_DOTFILES: "true"
     steps:
       - restore_cache:
           keys:
