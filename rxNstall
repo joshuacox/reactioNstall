@@ -99,6 +99,7 @@ install_meteor () {
   if [[ $VERBOSITY -gt '2' ]]; then
   echo 'Checking meteor...'
   fi
+  PATH=~/.meteor:$PATH
   if ! type "meteor" > /dev/null; then
     curl --silent https://install.meteor.com/ | sh
   else
