@@ -70,22 +70,24 @@ add_line_to()
 
 install_nvm () {
   touch ~/.profile
-  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
+  if [ "$FIX_NVM_PREFIX" = "true" ]; then
+    if [[ $VERBOSITY -gt '1' ]]; then
+      echo 'npm config delete prefix'
+    fi
+    npm config delete prefix
+  fi
 
   if [ "$FIX_DOTFILES" = "true" ]; then
     dotfiles_install
   fi
 
+  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
   if [ "$NVM_DIR_ADDS" = "true" ]; then
     nvm_dir_adds
   fi
 
-  if [ "$FIX_NVM_PREFIX" = "true" ]; then
-  if [[ $VERBOSITY -gt '1' ]]; then
-    echo 'npm config delete prefix'
-  fi
-    npm config delete prefix
-  fi
 }
 
 install_meteor () {
