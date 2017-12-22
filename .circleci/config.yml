@@ -11,6 +11,7 @@ jobs:
       FIX_NVM_PREFIX: "true"
       FIX_DOTFILES: "true"
       VERBOSITY: 100
+      HOME: /opt/circleci
     steps:
       - restore_cache:
           keys:
@@ -26,14 +27,14 @@ jobs:
       - run: sudo bash .ci/linux_before_install.sh
       - run: sudo bash .ci/rmdotfiles.sh
 
-      - run: sudo ls -alh .nvm
+      - run: sudo ls -alh /opt/circleci/.nvm
       - restore_cache:
           keys:
             - rxnstall-cache-v1-{{ .Branch }}-{{ .Revision }}
             - rxnstall-v1-{{ .Branch }}-
             - rxnstall-v1-
       - run: bash rxNstall
-      - run: sudo ls -alh .nvm
+      - run: sudo ls -alh /opt/circleci/.nvm
       - save_cache:
           key: rxnstall-v1-{{ .Branch }}-{{ .Revision }}
           paths:
