@@ -3,7 +3,7 @@ FROM ubuntu:xenial
 ENV BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONSTALL_UPDATED=20171218
+  REACTIONSTALL_UPDATED=20171221
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
