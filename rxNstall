@@ -97,12 +97,13 @@ install_meteor () {
   if [[ $VERBOSITY -gt '2' ]]; then
   echo 'Checking meteor...'
   fi
-  if [ ! -d "$HOME/.meteor" ]; then
+  if ! type "meteor" > /dev/null; then
     curl --silent https://install.meteor.com/ | sh
   else
     if [[ $VERBOSITY -gt '1' ]]; then
-      echo 'Meteor appears to be installed to ~/.meteor already, using that'
-      echo 'if there are issues try removing that directory (rm -Rf ~/.meteor) and re-run this script'
+      echo 'Meteor appears to be installed already, using that'
+      which meteor
+      echo 'if there are issues try removing that installed meteor'
     fi
   fi
 }
