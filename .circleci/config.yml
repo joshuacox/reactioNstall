@@ -9,8 +9,8 @@ jobs:
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}-{{ .Revision }}
-            - source-v1-{{ .Branch }}
-            - source-v1
+            - source-v1-{{ .Branch }}-
+            - source-v1-
       - checkout
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
@@ -23,8 +23,8 @@ jobs:
       - restore_cache:
           keys:
             - rxnstall-cache-v1-{{ .Branch }}-{{ .Revision }}
-            - rxnstall-v1-{{ .Branch }}
-            - rxnstall-v1
+            - rxnstall-v1-{{ .Branch }}-
+            - rxnstall-v1-
       - run: bash rxNstall
       - save_cache:
           key: rxnstall-v1-{{ .Branch }}-{{ .Revision }}
