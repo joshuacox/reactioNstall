@@ -6,8 +6,35 @@ jobs:
     environment:
       MINIKUBE_OPTS: "--vm-driver=none"
     steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
+            - source-v1-{{ .Branch }}-
+            - source-v1-
       - checkout
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ".git"
 
       - run: sudo bash .ci/linux_before_install.sh
+      - run: sudo bash .ci/rmdotfiles.sh
 
-      - run: /usr/bin/time -v make buster
+      - restore_cache:
+          keys:
+            - rxnstall-cache-v1-{{ .Branch }}-{{ .Revision }}
+            - rxnstall-v1-{{ .Branch }}-
+            - rxnstall-v1-
+      - run: bash rxNstall
+      - save_cache:
+          key: rxnstall-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ~/.meteor
+            - ~/.nvm
+
+      - run: bash test
+      - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
+      - run: echo '# bashrc'; cat ~/.bashrc
+      - run: echo '# zshrc'; cat ~/.zshrc
+      - run: echo '# bash_profile'; cat ~/.bash_profile
+      - run: echo '# profile'; cat ~/.profile
