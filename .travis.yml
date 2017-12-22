@@ -51,4 +51,5 @@ script:
   - cat ~/.zshrc
   - cat ~/.bash_profile
   - cat ~/.profile
+  - bash .ci/envtest.sh
   - bash -l .ci/test.sh
