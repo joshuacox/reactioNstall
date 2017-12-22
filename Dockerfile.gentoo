@@ -5,7 +5,7 @@ ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   EMERGE_OPTS='--quiet --quiet-build' \
   TERM=screen-256color \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONSTALL_UPDATED=20171218
+  REACTIONSTALL_UPDATED=20171221
 
 RUN echo emerge \
   && emerge-webrsync \
