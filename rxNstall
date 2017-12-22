@@ -34,10 +34,14 @@ chkdir () {
 reaction_full_test () {
   cd $TMP_DIR
   reaction help
-  echo init reaction
+  if [[ $VERBOSITY -gt '5' ]]; then
+    echo init reaction
+  fi
   reaction init
   cd reaction
-  echo test reaction
+  if [[ $VERBOSITY -gt '5' ]]; then
+    echo test reaction
+  fi
   reaction test
   cd
 }
@@ -98,7 +102,7 @@ install_meteor () {
   else
     if [[ $VERBOSITY -gt '1' ]]; then
       echo 'Meteor appears to be installed to ~/.meteor already, using that'
-      echo 'if there are issues try removing that directory (rm -Rf ~/.meteor) and re-running this script'
+      echo 'if there are issues try removing that directory (rm -Rf ~/.meteor) and re-run this script'
     fi
   fi
 }
@@ -227,7 +231,9 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
 fi
 
 if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
-  echo " $UNAME is a Supported OS"
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo " $UNAME is a Supported OS"
+  fi
 elif [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
   if [[ $VERBOSITY -gt '1' ]]; then
     echo " $UNAME is a Supported OS"
@@ -257,7 +263,6 @@ if [ "$UNAME" = "Darwin" ] ; then
   fi
 
   PLATFORM="os.osx.x86_64"
-  echo "WARNING: OSX is experimental for this installer at this time!"
 elif [ "$UNAME" = "Linux" ] ; then
   ### Linux ###
   LINUX_ARCH=$(uname -m)
