@@ -9,6 +9,7 @@ matrix:
         directories:
         - $HOME/.nvm
         - $HOME/.meteor
+        - $HOME/reaction
     - os: osx
       osx_image: xcode7.2
       env:
@@ -18,6 +19,7 @@ matrix:
         directories:
         - $HOME/.nvm
         - $HOME/.meteor
+        - $HOME/reaction
 
 language: bash
 
