@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+apt-get update
 
 BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates time'
 
