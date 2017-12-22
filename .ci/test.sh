@@ -11,4 +11,5 @@ else
   ls -lh $HOME/reaction
 fi
 cd $HOME/reaction
+reaction pull
 reaction --version
