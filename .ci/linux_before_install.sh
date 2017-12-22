@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+apt-get update
 
 BUILD_PACKAGES='bash git wget curl locales tar nodejs npm ca-certificates time'
 
@@ -17,6 +18,3 @@ DEBIAN_FRONTEND=noninteractive \
   && apt-get -y autoremove \
   && apt-get clean \
   && rm -Rf /var/lib/apt/lists/*
-
-rm -f ~/.bashrc
-rm -f ~/.bash_profile
