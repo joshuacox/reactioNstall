@@ -8,11 +8,16 @@ ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   REACTIONSTALL_UPDATED=20171218
 
 USER root
-COPY rxNstall /home/reaction/rxNstall
-RUN chown reaction:reaction /home/reaction/rxNstall
+RUN echo genteeded \
+  && useradd -s /bin/sh -d /home/rxn rxn \
+  && mkdir -p /home/rxn \
+  && chown rxn. /home/rxn
 
-USER reaction
-WORKDIR /home/reaction
+COPY rxNstall /home/rxn/rxNstall
+RUN chown -R rxn:rxn /home/rxn/rxNstall
+
+USER rxn
+WORKDIR /home/rxn
 
 RUN /bin/bash -l ./rxNstall
 
