@@ -55,4 +55,4 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm config delete prefix; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm config get prefix; fi
   - bash .ci/envtest.sh
-  - bash -l .ci/test.sh
+  - bash test.sh
