@@ -1,4 +1,5 @@
 #!/bin/bash -l
+PATH=~/.meteor:$PATH
 
 cd $HOME
 ls -lh .meteor
