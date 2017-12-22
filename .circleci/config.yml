@@ -54,7 +54,7 @@ jobs:
             - reaction-cache-v1-{{ .Branch }}-{{ .Revision }}
             - reaction-v1-{{ .Branch }}-
             - reaction-v1-
-      - run: bash test.sh
+      - run: bash test
       - save_cache:
           key: reaction-v1-{{ .Branch }}-{{ .Revision }}
           paths:
