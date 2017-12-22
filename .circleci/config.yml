@@ -46,6 +46,7 @@ jobs:
       - run: echo '# bash_profile'; cat ~/.bash_profile
       - run: echo '# profile'; cat ~/.profile
 
+      - run: bash .ci/envtest.sh
       - restore_cache:
           keys:
             - reaction-cache-v1-{{ .Branch }}-{{ .Revision }}
