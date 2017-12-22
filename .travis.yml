@@ -40,7 +40,7 @@ before_install:
 
 script:
   - bash rxNstall
-  - bash test
+  - bash .ci/test.sh
   - touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
   - echo '# bashrc'; cat ~/.bashrc
   - echo '# zshrc'; cat ~/.zshrc

@@ -117,8 +117,10 @@ reaction_install () {
 
   echo -n 'npm version: '
   npm -v
+  which npm
   echo -n 'node version: '
   node -v
+  which node
 
   echo 'Installing reaction-cli'
   npm i -g reaction-cli
@@ -159,7 +161,6 @@ osx_install () {
   echo "Installing NVM on OSX"
 
   install_nvm
-
 
   lts_install
 
