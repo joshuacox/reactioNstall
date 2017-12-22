@@ -17,6 +17,7 @@ trap killtmp EXIT
 cd $TMP_DIR
 
 reaction help
+reaction -v
 #echo init reaction
 #reaction init
 #cd reaction
