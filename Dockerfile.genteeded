@@ -1,4 +1,4 @@
-FROM joshuacox/rxnstall:gentoo
+FROM joshuacox/rxnstall:gentoo-20171221
 
 ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   REACTION_ROOT='/home/reaction/reaction' \
