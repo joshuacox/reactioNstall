@@ -5,6 +5,7 @@ matrix:
       sudo: false
       env:
         - TOOL_NODE_FLAGS="--max-old-space-size=2048"
+        - FIX_DOTFILES="true"
       cache:
         directories:
         - $HOME/.nvm
@@ -15,6 +16,7 @@ matrix:
       env:
         - TOOL_NODE_FLAGS="--max-old-space-size=2048"
         - FIX_NVM_PREFIX="true"
+        - FIX_DOTFILES="true"
       cache:
         directories:
         - $HOME/.nvm
