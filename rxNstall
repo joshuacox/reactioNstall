@@ -1,6 +1,7 @@
 #!/bin/bash
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
-METEOR_VERSION=${METEOR_VERSION:-1.6.0.1}
+: ${METEOR_VERSION:=1.6.0.1}
+: ${VERBOSITY:=0}
 
 killtmp () {
   cd
@@ -33,10 +34,14 @@ chkdir () {
 reaction_full_test () {
   cd $TMP_DIR
   reaction help
-  echo init reaction
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo init reaction
+  fi
   reaction init
   cd reaction
-  echo test reaction
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo test reaction
+  fi
   reaction test
   cd
 }
@@ -47,78 +52,108 @@ TARGET_FILE_FOR_ADD=~/.profile
 
 check_if_line_exists()
 {
-  echo "Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
+  if [[ $VERBOSITY -gt '7' ]]; then
+    echo "Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
+  fi
   grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
 }
 
 add_line_to()
 {
-  echo "Adding '$LINE_TO_ADD'  to $TARGET_FILE_FOR_ADD"
+  if [[ $VERBOSITY -gt '5' ]]; then
+    echo "Adding '$LINE_TO_ADD'  to $TARGET_FILE_FOR_ADD"
+  fi
   TARGET_FILE=$TARGET_FILE_FOR_ADD
     [ -w "$TARGET_FILE" ] || TARGET_FILE=$TARGET_FILE_FOR_ADD
     printf "%s\n" "$LINE_TO_ADD" >> "$TARGET_FILE"
 }
 
 install_nvm () {
-  echo "installing nvm"
   touch ~/.profile
-  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
+  if [ "$FIX_NVM_PREFIX" = "true" ]; then
+    if [[ $VERBOSITY -gt '1' ]]; then
+      echo 'npm config delete prefix'
+    fi
+    npm config delete prefix
+  fi
 
   if [ "$FIX_DOTFILES" = "true" ]; then
     dotfiles_install
   fi
 
+  curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+
   if [ "$NVM_DIR_ADDS" = "true" ]; then
     nvm_dir_adds
   fi
 
-  if [ "$FIX_NVM_PREFIX" = "true" ]; then
-    echo 'npm config delete prefix'
-    npm config delete prefix
-  fi
 }
 
 install_meteor () {
-  echo 'Installing meteor'
-  #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
-  curl --silent https://install.meteor.com/ | sh
   LINE_TO_ADD='export PATH=~/.meteor:$PATH'
-  TARGET_FILE_FOR_ADD=~/.bash_profile
+  TARGET_FILE_FOR_ADD=~/.bashrc
   check_if_line_exists || add_line_to
   TARGET_FILE_FOR_ADD=~/.zshrc
   check_if_line_exists || add_line_to
+  if [[ $VERBOSITY -gt '2' ]]; then
+  echo 'Checking meteor...'
+  fi
+  PATH=~/.meteor:$PATH
+  if ! type "meteor" > /dev/null; then
+    curl --silent https://install.meteor.com/ | sh
+  else
+    if [[ $VERBOSITY -gt '1' ]]; then
+      echo 'Meteor appears to be installed already, using that'
+      which meteor
+      echo 'if there are issues try removing that installed meteor'
+    fi
+  fi
 }
 
 lts_install () {
-  echo 'Installing Node 8 LTS/carbon'
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo 'Installing Node 8 LTS/carbon'
+  fi
 
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   nvm ls-remote --lts
-  echo "Engage nvm to install lts/carbon"
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo "Engage nvm to install lts/carbon"
+  fi
   nvm install --lts
-  echo "Engage nvm to alias lts/carbon to default"
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo "Engage nvm to alias lts/carbon to default"
+  fi
   nvm alias default lts/carbon
 }
 
 reaction_install () {
   install_meteor
 
-  echo 'Check npm and node are present'
+  if [[ $VERBOSITY -gt '2' ]]; then
+    echo 'Check npm and node are present'
+  fi
   check_cmd npm
   check_cmd node
   chkdir $HOME/.nvm
 
-  echo -n 'npm version: '
-  npm -v
-  echo -n 'node version: '
-  node -v
-
-  echo 'Installing reaction-cli'
+  if [[ $VERBOSITY -gt '3' ]]; then
+    echo -n 'npm version: '
+    npm -v
+    which npm
+    echo -n 'node version: '
+    node -v
+    which node
+    echo 'Installing reaction-cli'
+  fi
   npm i -g reaction-cli
-  echo 'reaction-cli has been installed...'
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo 'reaction-cli has been installed...'
+  fi
 }
 
 nvm_dir_adds () {
@@ -136,7 +171,9 @@ nvm_dir_adds () {
 }
 
 dotfiles_install () {
-  echo 'Adjusting dotfiles'
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo 'Adjusting dotfiles'
+  fi
   touch ~/.zshrc
   touch ~/.bashrc
   touch ~/.bash_profile
@@ -152,10 +189,11 @@ dotfiles_install () {
 }
 
 osx_install () {
-  echo "Installing NVM on OSX"
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo "Installing NVM on OSX"
+  fi
 
   install_nvm
-
 
   lts_install
 
@@ -163,7 +201,9 @@ osx_install () {
 }
 
 linux_install () {
-  echo "Installing NVM on Linux"
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo "Installing NVM on Linux"
+  fi
 
   install_nvm
 
@@ -195,9 +235,13 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
 fi
 
 if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
-  echo " $UNAME is a Supported OS"
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo " $UNAME is a Supported OS"
+  fi
 elif [ "$UNAME" ">" "MINGW" -a "$UNAME" "<" "MINGX" ] ; then
-  echo " $UNAME is a Supported OS"
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo " $UNAME is a Supported OS"
+  fi
 else
   echo " $UNAME is not a Supported OS"
   echo "Sorry, this OS is not supported yet via this installer."
@@ -223,7 +267,6 @@ if [ "$UNAME" = "Darwin" ] ; then
   fi
 
   PLATFORM="os.osx.x86_64"
-  echo "WARNING: OSX is experimental for this installer at this time!"
 elif [ "$UNAME" = "Linux" ] ; then
   ### Linux ###
   LINUX_ARCH=$(uname -m)
@@ -239,10 +282,8 @@ fi
 
 # make reqs
 if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
-  echo linux
   linux_install
 elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
-  echo osx
   osx_install
 elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
   echo windows is not support yet
@@ -250,7 +291,9 @@ elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
 fi
 
 #reaction_full_test
-reaction help
+if [[ $VERBOSITY -gt '1' ]]; then
+  reaction help
+fi
 echo 'rxNstall has finished'
 echo ''
 echo 'Notice you should open a new terminal now or `source .bashrc` now'
