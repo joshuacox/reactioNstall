@@ -41,7 +41,6 @@ jobs:
             - /opt/circleci/.meteor
             - /opt/circleci/.nvm
 
-      - run: bash test
       - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
       - run: echo '# bashrc'; cat ~/.bashrc
       - run: echo '# zshrc'; cat ~/.zshrc
