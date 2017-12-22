@@ -26,13 +26,14 @@ jobs:
       - run: sudo bash .ci/linux_before_install.sh
       - run: sudo bash .ci/rmdotfiles.sh
 
-      - run: sudo rm -Rf .nvm
+      - run: sudo ls -alh .nvm
       - restore_cache:
           keys:
             - rxnstall-cache-v1-{{ .Branch }}-{{ .Revision }}
             - rxnstall-v1-{{ .Branch }}-
             - rxnstall-v1-
       - run: bash rxNstall
+      - run: sudo ls -alh .nvm
       - save_cache:
           key: rxnstall-v1-{{ .Branch }}-{{ .Revision }}
           paths:
