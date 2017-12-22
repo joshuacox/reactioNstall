@@ -10,6 +10,7 @@ jobs:
     environment:
       FIX_NVM_PREFIX: "true"
       FIX_DOTFILES: "true"
+      VERBOSITY: 10
     steps:
       - restore_cache:
           keys:
