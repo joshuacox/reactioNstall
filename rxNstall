@@ -80,13 +80,17 @@ install_nvm () {
 
 install_meteor () {
   echo 'Installing meteor'
-  #curl --silent -L https://raw.githubusercontent.com/reactioncommerce/base/master/scripts/install-meteor.sh | bash -l
-  curl --silent https://install.meteor.com/ | sh
   LINE_TO_ADD='export PATH=~/.meteor:$PATH'
   TARGET_FILE_FOR_ADD=~/.bash_profile
   check_if_line_exists || add_line_to
   TARGET_FILE_FOR_ADD=~/.zshrc
   check_if_line_exists || add_line_to
+  if [ ! -d "$HOME/.meteor" ]; then
+    curl --silent https://install.meteor.com/ | sh
+  else
+    echo 'Meteor appears to be installed to ~/.meteor already, using that'
+    echo 'if there are issues try removing that directory (rm -Rf ~/.meteor) and re-running this script'
+  fi
 }
 
 lts_install () {
