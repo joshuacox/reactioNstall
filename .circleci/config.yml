@@ -38,8 +38,8 @@ jobs:
       - save_cache:
           key: rxnstall-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ~/.meteor
-            - ~/.nvm
+            - /opt/circleci/.meteor
+            - /opt/circleci/.nvm
 
       - run: bash test
       - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
