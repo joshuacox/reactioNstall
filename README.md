@@ -94,6 +94,14 @@ node 8 'carbon' using nvm.
 Feel free to submit PRs, or just an issue requesting more, all issues
 welcome here.
 
+### NVM
+
+[NVM](https://github.com/creationix/nvm) is what installs node lts/carbon the documentation for it can be found [there](https://github.com/creationix/nvm) and should be noted if you would like to install other node version and such.
+
+### Reaction Commerce
+
+Accordingly, [Reaction Commerce](https://reactioncommerce.com/) has their own [documentation](https://docs.reactioncommerce.com/) which should referred to as well.
+
 ### Asciinema example run
 
 This gives an example of successful run to help troubleshoot runs that
