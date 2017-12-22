@@ -39,6 +39,13 @@ jobs:
             - ~/.meteor
             - ~/.nvm
 
+      - run: bash test
+      - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
+      - run: echo '# bashrc'; cat ~/.bashrc
+      - run: echo '# zshrc'; cat ~/.zshrc
+      - run: echo '# bash_profile'; cat ~/.bash_profile
+      - run: echo '# profile'; cat ~/.profile
+
       - restore_cache:
           keys:
             - reaction-cache-v1-{{ .Branch }}-{{ .Revision }}
@@ -49,10 +56,3 @@ jobs:
           key: reaction-v1-{{ .Branch }}-{{ .Revision }}
           paths:
             - ~/reaction
-
-      - run: bash test
-      - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
-      - run: echo '# bashrc'; cat ~/.bashrc
-      - run: echo '# zshrc'; cat ~/.zshrc
-      - run: echo '# bash_profile'; cat ~/.bash_profile
-      - run: echo '# profile'; cat ~/.profile

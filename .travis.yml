@@ -46,9 +46,9 @@ before_install:
 
 script:
   - bash rxNstall
-  - bash .ci/test.sh
   - touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
   - echo '# bashrc'; cat ~/.bashrc
   - echo '# zshrc'; cat ~/.zshrc
   - echo '# bash_profile'; cat ~/.bash_profile
   - echo '# profile'; cat ~/.profile
+  - bash .ci/test.sh
