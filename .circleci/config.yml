@@ -6,7 +6,6 @@ jobs:
     environment:
       MINIKUBE_OPTS: "--vm-driver=none"
     steps:
-      - run: sudo apt-get remove nodejs npm
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}-{{ .Revision }}
@@ -19,6 +18,7 @@ jobs:
             - ".git"
 
       - run: sudo bash .ci/linux_before_install.sh
+      - run: sudo apt-get remove nodejs npm
       - run: sudo bash .ci/rmdotfiles.sh
 
       - restore_cache:
