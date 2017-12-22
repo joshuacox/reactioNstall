@@ -7,8 +7,9 @@ ENV BUILD_PACKAGES='bash dev-vcs/git wget net-misc/curl tar' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
   REACTIONSTALL_UPDATED=20171218
 
+USER root
 COPY rxNstall /home/reaction/rxNstall
-RUN chown -R reaction:reaction /home/reaction
+RUN chown reaction:reaction /home/reaction/rxNstall
 
 USER reaction
 WORKDIR /home/reaction
