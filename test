@@ -1,5 +1,5 @@
 #!/bin/bash -l
-
+PATH=~/.meteor:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -23,6 +23,32 @@ reaction help
 #echo test reaction
 #reaction test
 #cd
+cd $HOME
+echo ''
+echo -n 'Which node:'
 which node
+echo -n 'Which NPM: '
 which npm
+echo -n 'Which meteor: '
+which meteor
+echo ''
+echo 'Inside the meteor directory:'
+ls -lh .meteor
+echo ''
+echo -n 'Reaction version:'
+reaction -v
+which reaction
+echo ''
+if [ "$REACTION_FULL_TEST" = "true" ]; then
+  if [ ! -d "$HOME/reaction/.git" ]; then
+    mv reaction reaction-`date -I`
+    reaction init
+  else
+    ls -lh $HOME/reaction
+  fi
+  cd $HOME/reaction
+  reaction pull
+  reaction --version
+fi
+echo ''
 echo 'end tests'
