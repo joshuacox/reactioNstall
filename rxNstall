@@ -34,12 +34,12 @@ chkdir () {
 reaction_full_test () {
   cd $TMP_DIR
   reaction help
-  if [[ $VERBOSITY -gt '5' ]]; then
+  if [[ $VERBOSITY -gt '2' ]]; then
     echo init reaction
   fi
   reaction init
   cd reaction
-  if [[ $VERBOSITY -gt '5' ]]; then
+  if [[ $VERBOSITY -gt '2' ]]; then
     echo test reaction
   fi
   reaction test
@@ -52,7 +52,7 @@ TARGET_FILE_FOR_ADD=~/.profile
 
 check_if_line_exists()
 {
-  if [[ $VERBOSITY -gt '5' ]]; then
+  if [[ $VERBOSITY -gt '7' ]]; then
     echo "Checking for '$LINE_TO_ADD'  in $TARGET_FILE_FOR_ADD"
   fi
   grep -qsFx "$LINE_TO_ADD" $TARGET_FILE_FOR_ADD
