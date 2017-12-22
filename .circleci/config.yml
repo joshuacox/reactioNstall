@@ -8,6 +8,7 @@ jobs:
   build:
     machine: true
     environment:
+      TOOL_NODE_FLAGS: "--max-old-space-size=2048"
       FIX_NVM_PREFIX: "true"
       FIX_DOTFILES: "true"
       VERBOSITY: 100
