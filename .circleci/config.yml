@@ -42,7 +42,6 @@ jobs:
             - /opt/circleci/.meteor
             - /opt/circleci/.nvm
 
-      - run: bash test
       - run: touch ~/.bashrc ~/.bash_profile ~/.zshrc ~/.profile
       - run: echo '# bashrc'; cat ~/.bashrc
       - run: echo '# zshrc'; cat ~/.zshrc
@@ -55,7 +54,7 @@ jobs:
             - reaction-cache-v1-{{ .Branch }}-{{ .Revision }}
             - reaction-v1-{{ .Branch }}-
             - reaction-v1-
-      - run: bash .ci/test
+      - run: bash test
       - save_cache:
           key: reaction-v1-{{ .Branch }}-{{ .Revision }}
           paths:
