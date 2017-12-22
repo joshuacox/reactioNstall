@@ -1,5 +1,4 @@
 #!/bin/bash -l
-source ~/.profile
 
 cd $HOME
 ls -lh .meteor
