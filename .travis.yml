@@ -51,6 +51,8 @@ script:
   - cat ~/.zshrc
   - cat ~/.bash_profile
   - cat ~/.profile
-  - bash .ci/envtest.sh
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm config get prefix; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm config delete prefix; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm config get prefix; fi
+  - bash .ci/envtest.sh
   - bash -l .ci/test.sh

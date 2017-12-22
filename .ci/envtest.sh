@@ -11,6 +11,7 @@ which node
 nvm ls
 nvm use --lts lts/carbon
 echo PATH is $PATH
+ls -alh "$HOME/"|grep nvm
 ls -lh "$HOME/.nvm"
 echo doubledown
 export NVM_DIR="$HOME/.nvm"
