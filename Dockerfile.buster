@@ -3,7 +3,7 @@ FROM debian:buster
 ENV BUILD_PACKAGES='bash git wget curl locales tar nodejs ca-certificates' \
   REACTION_ROOT='/home/reaction/reaction' \
   TOOL_NODE_FLAGS="--max-old-space-size=2048" \
-  REACTIONSTALL_UPDATED=20171222
+  REACTIONSTALL_UPDATED=20171224
 
 RUN DEBIAN_FRONTEND=noninteractive \
   && apt-get -qq update && apt-get -qqy dist-upgrade \
