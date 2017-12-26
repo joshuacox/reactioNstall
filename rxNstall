@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 TMP_DIR=$(mktemp -d --suffix='.reactioNstall.tmp' 2>/dev/null || mktemp -d -t '.reactioNstall.tmp')
 : ${METEOR_VERSION:=1.6.0.1}
 : ${VERBOSITY:=0}
@@ -212,6 +212,18 @@ linux_install () {
   reaction_install
 }
 
+freebsd_install () {
+  if [[ $VERBOSITY -gt '1' ]]; then
+    echo "Installing NVM on FreeBSD"
+  fi
+
+  install_nvm
+
+  lts_install
+
+  reaction_install
+}
+
 #### taking some cues directly from the meteor install script
 #### my comments will have four shi '####'
 
@@ -234,7 +246,7 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   exit 1
 fi
 
-if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] ; then
+if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] -o "$UNAME" == "FreeBSD"  ; then
   if [[ $VERBOSITY -gt '1' ]]; then
     echo " $UNAME is a Supported OS"
   fi
@@ -274,7 +286,17 @@ elif [ "$UNAME" = "Linux" ] ; then
     PLATFORM="os.linux.x86_64"
   else
     echo "Unusable architecture: ${LINUX_ARCH}"
-    echo "ReactioNstall only supports x86_64 for now."
+    echo "ReactioNstall only supports x86_64 for now on Linux."
+    exit 1
+  fi
+elif [ "$UNAME" = "FreeBSD" ] ; then
+  ### FreeBSD ###
+  FREEBSD_ARCH=$(uname -m)
+  if [ "${FREEBSD_ARCH}" = "amd64" ] ; then
+    PLATFORM="os.freebsd.amd64"
+  else
+    echo "Unusable architecture: ${FREEBSD_ARCH}"
+    echo "rxNstall only supports amd64 for now on FreeBSD."
     exit 1
   fi
 fi
@@ -283,6 +305,8 @@ fi
 # make reqs
 if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
   linux_install
+elif [ "$PLATFORM" = "os.freebsd.amd64" ] ; then
+  freebsd_install
 elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
   osx_install
 elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
