@@ -246,7 +246,7 @@ if [ "$UNAME" = "CYGWIN_NT-10.0" ] ; then
   exit 1
 fi
 
-if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" ] -o "$UNAME" == "FreeBSD"  ; then
+if [ "$UNAME" == "Linux" -o "$UNAME" == "Darwin" -o "$UNAME" == "FreeBSD" ] ; then
   if [[ $VERBOSITY -gt '1' ]]; then
     echo " $UNAME is a Supported OS"
   fi
