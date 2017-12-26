@@ -306,11 +306,13 @@ fi
 if [ "$PLATFORM" = "os.linux.x86_64" ] ; then
   linux_install
 elif [ "$PLATFORM" = "os.freebsd.amd64" ] ; then
-  freebsd_install
+#  freebsd_install
+  echo "FreeBSD is not supported yet by Meteor, and therefore won't work with reaction"
+  exit 1
 elif [ "$PLATFORM" = "os.osx.x86_64" ] ; then
   osx_install
 elif [ "$PLATFORM" = "os.windows.x86_64" ] ; then
-  echo windows is not support yet
+  echo "Windows is not support yet"
   exit 1
 fi
 
